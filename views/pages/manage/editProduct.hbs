@@ -1,0 +1,11 @@
+{{> manageNavbar}}
+<h2>Редактирование товара</h2>
+
+<form action="/edit" method="POST" enctype="multipart/form-data">
+    <span>Имя: </span><input type="text" name="prodTitle"><br>
+    <span>Категории: </span><input type="text" name="category"><br>
+    <span>Цена: </span><input type="text" name="price"><br>
+    <span>Описание: </span><input type="text" name="description"><br>
+    <span>Фото: </span><input type="file" name="photo" multiple accept=".jpg">
+    <button type="submit">Сохранить</button>
+</form>

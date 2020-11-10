@@ -1,0 +1,28 @@
+{{> manageNavbar}}
+<h2>Товары</h2>
+<a href="/manage/products/create"><button>Создать товар</button></a>
+
+
+
+{{#if products.length}}
+{{products}}
+<ul>
+    {{#each products}}
+
+    <li>
+        <label>
+            <span>
+                <form action="./products/edit" method="GET">
+                    <img src="../image/products/{{prodTitle}}/1.jpg" alt="картинка" width="50">
+                    {{prodTitle}}
+                    {{category}}
+                    <div style="display:none" name="prodId">{{_id}}</div>
+            </span> <button type="submit">Edit</button></form>
+
+        </label>
+    </li>
+    {{/each}}
+</ul>
+{{else}}
+<h3>Товаров нет!</h3>
+{{/if}}

@@ -4,6 +4,8 @@ const fs = require('fs')
 
 const render = async() => {
 
+    fs.mkdirSync('./static/style/', { recursive: true })
+
     await sass.render({
         file: './sass/generalStyle.scss'
     }, (error, result) => {

@@ -13,31 +13,25 @@ const photoRedirect = (photos, prodTitle) => {
         const tmpPath = path.join(__dirname, '../tmp/')
 
 
-        fs.access(dirPath, (err) => {
+        fs.mkdirSync(dirPath, { recursive: true })
 
-            if (err.code === 'ENOENT') {
-                fs.mkdirSync(dirPath, { recursive: true })
-            }
+        readAndWrite(photos[0], 'Main', dirPath, tmpPath)
 
-
-
-            readAndWrite(photos[0], 'Main', dirPath, tmpPath)
-
-            for (i = 1; i < photos.length; i++) {
-                elemenet = photos[i]
-                readAndWrite(elemenet, '' + i, dirPath, tmpPath)
-            }
+        for (i = 1; i < photos.length; i++) {
+            elemenet = photos[i]
+            readAndWrite(elemenet, '' + i, dirPath, tmpPath)
+        }
 
 
-            clearTmp(tmpPath)
+        clearTmp(tmpPath)
 
-        })
+
     } catch (err) {
         console.log(err)
     }
 
 
-    function readAndWrite(file, endFileName, dirPath, tmpPath) {
+    async function readAndWrite(file, endFileName, dirPath, tmpPath) {
         try {
             const fileName = file.filename
             const data = fs.readFileSync(tmpPath + fileName)

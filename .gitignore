@@ -1,4 +1,4 @@
 node_modules
-static/image/*/*
-static
+static/*/*/*
+static/*/*
 temple

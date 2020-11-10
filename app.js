@@ -1,8 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
-const pageRoutes = require('./Routes/pages.route')
-const manageRoutes = require('./Routes/manage.route')
+const pageRoutes = require('./routes/pages.route')
+const manageRoutes = require('./routes/manage.route')
 const sassCompile = require('./controller/sassRender')
 const path = require('path')
 

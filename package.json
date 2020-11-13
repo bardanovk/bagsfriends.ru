@@ -4,19 +4,24 @@
     "description": "server app for bagsfriends.ru",
     "main": "app.js",
     "dependencies": {
+        "bcrypt": "^5.0.0",
+        "cookie-parser": "^1.4.5",
         "express": "^4.17.1",
         "express-handlebars": "^5.2.0",
+        "express-sessions": "^1.0.6",
         "mongoose": "^5.10.11",
         "multer": "^1.4.2",
-        "node": "^15.0.1"
+        "node": "^15.0.1",
+        "sass": "^1.28.0",
+        "speakeasy": "^2.0.0"
     },
     "devDependencies": {
-        "nodemon": "^2.0.6",
-        "sass": "^1.28.0"
+        "nodemon": "^2.0.6"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node app",
+        "secret": "node ./controller/generateSec.js",
         "dev": "nodemon app"
     },
     "keywords": [

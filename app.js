@@ -3,9 +3,13 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const pageRoutes = require('./routes/pages.route')
 const manageRoutes = require('./routes/manage.route')
-const sassCompile = require('./controller/sassRender')
+const sassCompile = require('./middleware/sassRender')
 const path = require('path')
+const cookieParser = require('cookie-parser')
 
+const config = require('./config/tokens')
+const options = require('./config/options')
+const router = require('./routes/manage.route')
 
 const PORT = process.env.PORT || 3000
 

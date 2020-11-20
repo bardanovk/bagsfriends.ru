@@ -5,19 +5,19 @@
 
 
 {{#if products.length}}
-{{products}}
+
 <ul>
     {{#each products}}
 
     <li>
         <label>
             <span>
-                <form action="./products/edit" method="GET">
-                    <img src="../image/products/{{prodTitle}}/1.jpg" alt="картинка" width="50">
-                    {{prodTitle}}
-                    {{category}}
-                    <div style="display:none" name="prodId">{{_id}}</div>
-            </span> <button type="submit">Edit</button></form>
+
+                <img src="../image/products/{{prodTitle}}/Main.jpg" alt="картинка" width="50">
+                {{prodTitle}}
+                {{category}}
+                <div style="display:none" name="prodId">{{_id}}</div>
+            </span> <a href="./products/edit/{{_id}}"><button type="button">Edit</button></a>
 
         </label>
     </li>

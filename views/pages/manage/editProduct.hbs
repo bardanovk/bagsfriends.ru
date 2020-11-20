@@ -1,11 +1,16 @@
 {{> manageNavbar}}
 <h2>Редактирование товара</h2>
 
-<form action="/edit" method="POST" enctype="multipart/form-data">
-    <span>Имя: </span><input type="text" name="prodTitle"><br>
-    <span>Категории: </span><input type="text" name="category"><br>
-    <span>Цена: </span><input type="text" name="price"><br>
-    <span>Описание: </span><input type="text" name="description"><br>
-    <span>Фото: </span><input type="file" name="photo" multiple accept=".jpg">
+<form action="/edit/{{product._id}}" method="POST">
+    <span>Имя: </span><input type="text" name="prodTitle" value="{{product.prodTitle}}"><br>
+    <span>Категории: </span><input type="text" name="category" value="{{product.category}}"><br>
+    <span>Цена: </span><input type="text" name="price" value="{{product.price}}"><br>
+    <span>Описание: </span><input type="text" name="description" value="{{product.description}}"><br>
+    <span>Фото: </span><input type="file" name="photo" multiple accept=".jpg"><br>
+    {{#if product.visible}}
+    <span>Видимость: </span><input type="checkbox" name="visible" checked><br>
+    {{else}}
+    <span>Видимость: </span><input type="checkbox" name="visible"><br>
+    {{/if}}
     <button type="submit">Сохранить</button>
 </form>

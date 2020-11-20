@@ -57,6 +57,7 @@ router.get('/manage/news', (req, res) => {
     else
         res.redirect('/login')
 })
+
 router.get('/manage/products/edit', (req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
         prodId = req.body.prodId
@@ -73,10 +74,6 @@ router.get('/manage/products/edit', (req, res) => {
 })
 
 router.get('/login', async(req, res, next) => {
-    /*console.log(Object.keys(req.signedCookies))
-    console.log(req.headers['user-agent']);
-    console.log(req.headers['accept']);
-    console.log(req.headers['x-forwarded-for'] || req.connection.remoteAddress)*/
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid))
         res.redirect('/manage')
     else
@@ -85,9 +82,9 @@ router.get('/login', async(req, res, next) => {
 })
 
 router.post('/login', async(req, res) => {
-    console.log(verifyF2B(req.body.pass))
+    //console.log(req.body, req.body.pass1, req.aborted.pass2, verifyF2B(req.body.pass1, req.body.pass2))
 
-    if (verifyF2B(req.body.pass)) {
+    if (verifyF2B(req.body.pass1, req.body.pass2)) {
         res.cookie('sid', await hashCookie(req), options.admCookieOptions)
         res.redirect('/manage')
     } else {
@@ -97,18 +94,62 @@ router.post('/login', async(req, res) => {
 
 router.post('/create', upload.array('photo'), async(req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
-        photoRedirect(req.files, req.body.prodTitle)
+        if (req.files.length != 0)
+            photoRedirect(req.files, req.body.prodTitle)
+        const checked = !!req.body.visible || false
         const product = new Product({
             prodTitle: req.body.prodTitle,
             category: req.body.category,
+            visible: checked,
             price: req.body.price,
             description: req.body.description
         })
+
+        console.log('body', req.body)
+        console.log('product', product)
 
         product.save()
         res.redirect('/manage/products')
     } else
         res.redirect('/login')
+})
+
+router.get('/manage/products/edit/:id', async(req, res) => {
+    if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
+
+        const product = await Product.findById(req.params.id, (e) => {
+                if (e)
+                    console.log(e)
+            }).lean()
+            //console.log(typeof product.visible, product.visible)
+        res.render('./pages/manage/editProduct', { layout: 'manage', product })
+
+    } else
+        res.redirect('/login')
+})
+
+router.post('/edit/:id', async(req, res) => {
+    if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
+        try {
+            //console.log('body', req.body)
+            let product = await Product.findById(req.params.id)
+                //console.log(product);
+            const checked = !!req.body.visible || false
+                //console.log(checked);
+            product.prodTitle = req.body.prodTitle
+            product.category = req.body.category
+            product.price = req.body.price
+            product.visible = checked
+            product.description = req.body.description
+                //console.log(product)
+            product.save()
+        } catch (e) {
+            console.log('UPDATE PRODUCT ERROR', e);
+        }
+        res.redirect('../manage/products')
+    } else
+        res.redirect('/login')
+
 })
 
 module.exports = router

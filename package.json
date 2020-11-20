@@ -21,7 +21,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node app",
-        "secret": "node ./controller/generateSec.js",
+        "secret": "node ./middleware/generateSec.js",
         "dev": "nodemon app"
     },
     "keywords": [

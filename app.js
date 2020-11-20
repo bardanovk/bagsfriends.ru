@@ -5,7 +5,6 @@ const pageRoutes = require('./routes/pages.route')
 const manageRoutes = require('./routes/manage.route')
 const sassCompile = require('./middleware/sassRender')
 const path = require('path')
-const cookieParser = require('cookie-parser')
 
 const config = require('./config/tokens')
 const options = require('./config/options')

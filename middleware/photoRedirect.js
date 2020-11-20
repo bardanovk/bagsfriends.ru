@@ -27,7 +27,7 @@ const photoRedirect = (photos, prodTitle) => {
 
 
     } catch (err) {
-        console.log(err)
+        console.log('PHOTO REDIRECT ERROR', err)
     }
 
 
@@ -37,20 +37,24 @@ const photoRedirect = (photos, prodTitle) => {
             const data = fs.readFileSync(tmpPath + fileName)
             fs.writeFileSync(dirPath + endFileName + '.jpg', data, { flag: 'a' })
         } catch (err) {
-            console.log(err)
+            console.log('PHOTO REDIRECT ERROR', err)
         }
     }
 
     function clearTmp(directory) {
-        fs.readdir(directory, (err, files) => {
-            if (err) throw err;
+        try {
+            fs.readdir(directory, (err, files) => {
+                if (err) throw err;
 
-            for (const file of files) {
-                fs.unlink(path.join(directory, file), err => {
-                    if (err) throw err
-                })
-            }
-        })
+                for (const file of files) {
+                    fs.unlink(path.join(directory, file), err => {
+                        if (err) throw err
+                    })
+                }
+            })
+        } catch (e) {
+            console.log('PHOTO REDIRECT ERROR', e)
+        }
     }
 }
 

@@ -31,5 +31,8 @@
         "mongodb"
     ],
     "author": "Bardanov K <bardanovk@gmail.com>",
-    "license": "ISC"
+    "license": "ISC",
+    "nodemonConfig": {
+
+    }
 }

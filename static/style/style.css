@@ -9,3 +9,16 @@
 body {
   font-family: "Cyrillic Times ET";
 }
+
+.navbar {
+  padding: 0 25%;
+}
+.navbar ul {
+  display: inline-block;
+}
+.navbar .navbar-logo {
+  display: inline-block;
+}
+.navbar .navbar-link {
+  display: inline-block;
+}

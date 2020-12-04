@@ -1,4 +1,3 @@
-{{> manageNavbar}}
 <h2>Товары</h2>
 <a href="/manage/products/create"><button>Создать товар</button></a>
 
@@ -8,17 +7,14 @@
 
 <ul>
     {{#each products}}
-
     <li>
         <label>
             <span>
-
                 <img src="../image/products/{{prodTitle}}/Main.jpg" alt="картинка" width="50">
                 {{prodTitle}}
                 {{category}}
                 <div style="display:none" name="prodId">{{_id}}</div>
             </span> <a href="./products/edit/{{_id}}"><button type="button">Edit</button></a>
-
         </label>
     </li>
     {{/each}}

@@ -1,7 +1,6 @@
-{{> manageNavbar}}
 <h2>Редактирование товара</h2>
 
-<form action="/edit/{{product._id}}" method="POST">
+<form action="/product/edit/{{product._id}}" method="POST">
     <span>Имя: </span><input type="text" name="prodTitle" value="{{product.prodTitle}}"><br>
     <span>Категории: </span><input type="text" name="category" value="{{product.category}}"><br>
     <span>Цена: </span><input type="text" name="price" value="{{product.price}}"><br>

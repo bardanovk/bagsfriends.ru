@@ -12,3 +12,16 @@ body {
     // color: green;
     // background-color: grey;
 }
+
+.navbar {
+    padding: 0 25%;
+    ul {
+        display: inline-block;
+    }
+    .navbar-logo {
+        display: inline-block;
+    }
+    .navbar-link {
+        display: inline-block
+    }
+}

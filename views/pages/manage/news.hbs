@@ -1,2 +1,24 @@
-{{> manageNavbar}}
-<h2>News</h2>
+<h2>Блог новостей</h2>
+
+<a href="/manage/news/create"><button>Создать новость</button></a>
+
+
+{{#if news.length}}
+
+<ul>
+    {{#each products}}
+    <li>
+        <label>
+            <span>
+                <img src="../image/products/{{prodTitle}}/Main.jpg" alt="картинка" width="50">
+                {{prodTitle}}
+                {{category}}
+                <div style="display:none" name="prodId">{{_id}}</div>
+            </span> <a href="./products/edit/{{_id}}"><button type="button">Edit</button></a>
+        </label>
+    </li>
+    {{/each}}
+</ul>
+{{else}}
+<h3>Новостей нет!</h3>
+{{/if}}

@@ -1,0 +1,11 @@
+<h1>Создать новость</h1>
+
+<form action="/news/create" method="POST" enctype="multipart/form-data">
+    <span>Имя: </span><input type="text" name="newsTitle"><br>
+    <span>Категории: </span><input type="text" name="category"><br>
+    <span>Текст: </span><input type="text" name="text"><br>
+    <span>Автор: </span><input type="text" name="author"><br>
+    <span>Фото: </span><input type="file" name="photo" multiple accept=".jpg">
+    <span>Видимость: </span><input type="checkbox" name="visible">
+    <button type="submit">Сохранить</button>
+</form>

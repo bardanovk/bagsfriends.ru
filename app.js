@@ -30,9 +30,6 @@ app.use(pageRoutes)
 app.use(manageRoutes)
 app.use(express.static(path.join(__dirname, 'static')))
 
-
-
-
 async function start() {
     try {
         sassCompile()

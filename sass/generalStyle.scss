@@ -8,8 +8,8 @@
 }
 
 body {
+    margin: 0 !important;
     font-family: 'Cyrillic Times ET';
-    // color: green;
     // background-color: grey;
 }
 
@@ -24,4 +24,17 @@ body {
     .navbar-link {
         display: inline-block
     }
+}
+
+.prodCard {
+    margin: 5px;
+    padding: 5px;
+    background-color: #B5ADAD;
+    display: inline-block;
+}
+
+.productContainer {
+    margin: 0;
+    width: 100vw;
+    background-color: #EE9191;
 }

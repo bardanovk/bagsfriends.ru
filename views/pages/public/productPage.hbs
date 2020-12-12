@@ -1,1 +1,11 @@
 <h1>Страница товара</h1>
+
+<img src="../../image/products/{{product.prodTitle}}/Main.jpg" alt="Картинка"><br>
+<input id="prodID" type="text" value="{{product._id}}" hidden>
+{{product.prodTitle}} <br>
+
+{{product.price}} <br>
+
+<button onclick="addToBasket ()">Добавить в корзину</button>
+
+<script src="../../script/toBasket.js"></script>

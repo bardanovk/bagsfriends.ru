@@ -112,6 +112,29 @@ router.get('/manage/products/edit/:id', async(req, res) => {
         res.redirect('/login')
 })
 
+router.post('/manage/products/edit/:id', async(req, res) => {
+    if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
+        try {
+            //console.log('body', req.body)
+            let product = await Product.findById(req.params.id)
+                //console.log(product);
+            const checked = !!req.body.visible || false
+                //console.log(checked);
+            product.prodTitle = req.body.prodTitle
+            product.category = req.body.category
+            product.price = req.body.price
+            product.visible = checked
+            product.description = req.body.description
+                //console.log(product)
+            product.save()
+        } catch (e) {
+            console.log('UPDATE PRODUCT ERROR', e);
+        }
+        res.redirect('../../../manage/products')
+    } else
+        res.redirect('/login')
+})
+
 router.get('/manage/news', (req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
         const news = News.find({})

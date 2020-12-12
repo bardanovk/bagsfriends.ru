@@ -1,1 +1,14 @@
 <h1>basket</h1>
+
+{{#if basket.length}}
+{{#each basket}}
+<div class="prodCard">
+    <img src="image/products/{{prodTitle}}/Main.jpg" alt="Картинка">
+    <div class="prodTitle">{{prodTitle}}</div>
+    <div class="price">{{price}}</div>
+
+</div>
+{{/each}}
+{{else}}
+Корзина пуста
+{{/if}}

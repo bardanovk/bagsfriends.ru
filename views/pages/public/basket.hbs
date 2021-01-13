@@ -2,8 +2,9 @@
 
 {{#if basket.length}}
 {{#each basket}}
+<div>{{basket}}</div>
 <div class="prodCard">
-    <img src="image/products/{{prodTitle}}/Main.jpg" alt="Картинка">
+    <img src="/image/products/{{basket.Product.prodTitle}}/Main.jpg" alt="Картинка">
     <div class="prodTitle">{{prodTitle}}</div>
     <div class="price">{{price}}</div>
 

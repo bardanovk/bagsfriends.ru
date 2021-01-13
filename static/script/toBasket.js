@@ -6,7 +6,7 @@ function addToBasket() {
         order = window.cookie.get('order')
         window.cookie.set('order', order + ' ' + str)
     } else
-        window.cookie.set('order', order)
+        window.cookie.set('order', str)
     alert('Товар добавлен в корзину')
 }
 

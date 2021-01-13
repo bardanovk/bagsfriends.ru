@@ -37,15 +37,26 @@ router.get('/contact', (req, res) => {
 
 router.get('/basket', async(req, res) => {
     console.log(req.cookies.order)
-    products = req.cookies.order.split(' ')
-    console.log(products)
-    var basket = {};
-    products.forEach(element => {
-        product = Product.findById(element).lean()
-        basket.push(product)
-    });
-    console.log('basket', basket);
-    res.render('./pages/public/basket', { title: 'Корзина', basket })
+    if (req.cookies.order) {
+        products = req.cookies.order.split(' ')
+        console.log(products)
+
+        var basket = [];
+
+
+        /*for (let i = 0; i < products.lenght; i++) {
+            product = Product.findById(products[i].lean())
+            basket.push(product)
+        }*/
+        await products.forEach(element => {
+            product = Product.findById(element).lean()
+            basket.push(product)
+        });
+
+        console.log('basket', basket[0]);
+        res.render('./pages/public/basket', { title: 'Корзина', basket })
+    }
+    res.render('./pages/public/basket', { title: 'Корзина' })
 })
 
 module.exports = router

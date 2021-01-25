@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 })
 router.get('/shop', async (req, res) => {
     const products = await Product.find({ visible: true }).lean()
-    console.log(products);
+    //console.log(products);
     res.render('./pages/public/shop', { title: 'Каталог', products })
 })
 
@@ -37,17 +37,17 @@ router.get('/contact', (req, res) => {
 })
 
 router.get('/basket', async (req, res) => {
-    console.log(req.cookies.order)
+    //console.log(req.cookies.order)
     if (req.cookies.order) {
         products = req.cookies.order.split(' ')
-        console.log('prode', products)
+        //console.log('prode', products)
 
         var basket = [];
 
         for (let i = 0; i < products.length; i++) {
-            console.log('id', products[i]);
+            //console.log('id', products[i]);
             product = await Product.findById(products[i]).lean()
-            console.log('prodes', product)
+            //console.log('prodes', product)
             basket.push(product)
         }
         /*await products.forEach(element => {
@@ -56,7 +56,7 @@ router.get('/basket', async (req, res) => {
             basket.push(product)
         });*/
 
-        console.log('basket', basket);
+        //console.log('basket', basket);
         res.render('./pages/public/basket', { title: 'Корзина', basket })
     } else
         res.render('./pages/public/basket', { title: 'Корзина' })

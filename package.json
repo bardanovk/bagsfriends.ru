@@ -22,7 +22,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node app",
         "secret": "node ./middleware/generateSec.js",
-        "dev": "nodemon -e scss,js,json,mjs app"
+        "dev": "nodemon -e scss,js,json,mjs,hbs app"
     },
     "keywords": [
         "nodejs",

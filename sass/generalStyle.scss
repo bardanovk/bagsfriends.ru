@@ -7,22 +7,103 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Bellota';
+    src: url('../fonts/Bellota-Regular.eot');
+    src: url('../fonts/Bellota-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/Bellota-Regular.woff2') format('woff2'), url('../fonts/Bellota-Regular.woff') format('woff'), url('../fonts/Bellota-Regular.ttf') format('truetype'), url('../fonts/Bellota-Regular.svg#Bellota-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bellota';
+    src: url('../fonts/Bellota-LightItalic.eot');
+    src: url('../fonts/Bellota-LightItalic.eot?#iefix') format('embedded-opentype'), url('../fonts/Bellota-LightItalic.woff2') format('woff2'), url('../fonts/Bellota-LightItalic.woff') format('woff'), url('../fonts/Bellota-LightItalic.ttf') format('truetype'), url('../fonts/Bellota-LightItalic.svg#Bellota-LightItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bellota';
+    src: url('../fonts/Bellota-Italic.eot');
+    src: url('../fonts/Bellota-Italic.eot?#iefix') format('embedded-opentype'), url('../fonts/Bellota-Italic.woff2') format('woff2'), url('../fonts/Bellota-Italic.woff') format('woff'), url('../fonts/Bellota-Italic.ttf') format('truetype'), url('../fonts/Bellota-Italic.svg#Bellota-Italic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bellota';
+    src: url('../fonts/Bellota-Light.eot');
+    src: url('../fonts/Bellota-Light.eot?#iefix') format('embedded-opentype'), url('../fonts/Bellota-Light.woff2') format('woff2'), url('../fonts/Bellota-Light.woff') format('woff'), url('../fonts/Bellota-Light.ttf') format('truetype'), url('../fonts/Bellota-Light.svg#Bellota-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bellota';
+    src: url('../fonts/Bellota-BoldItalic.eot');
+    src: url('../fonts/Bellota-BoldItalic.eot?#iefix') format('embedded-opentype'), url('../fonts/Bellota-BoldItalic.woff2') format('woff2'), url('../fonts/Bellota-BoldItalic.woff') format('woff'), url('../fonts/Bellota-BoldItalic.ttf') format('truetype'), url('../fonts/Bellota-BoldItalic.svg#Bellota-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bellota';
+    src: url('../fonts/Bellota-Bold.eot');
+    src: url('../fonts/Bellota-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/Bellota-Bold.woff2') format('woff2'), url('../fonts/Bellota-Bold.woff') format('woff'), url('../fonts/Bellota-Bold.ttf') format('truetype'), url('../fonts/Bellota-Bold.svg#Bellota-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
     margin: 0 !important;
-    font-family: 'Cyrillic Times ET';
+    //font-family: 'Cyrillic Times ET';
     // background-color: grey;
 }
 
-.navbar {
-    padding: 0 25%;
+a {
+    color: black;
+    text-decoration: none;
+    transition: 0.3s;
+    &:hover {
+        color: rgb(184, 179, 179);
+    }
+}
+
+.navbar-desktop {
+    padding: 0;
     ul {
-        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    .navbar-head {
+        width: 100%;
+        a {
+            display: flex;
+            justify-content: center;
+        }
     }
     .navbar-logo {
-        display: inline-block;
+        width: 35%;
+    }
+}
+
+.navbar-footer {
+    .navbar-links {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 20px;
     }
     .navbar-link {
-        display: inline-block
+        display: inline-block;
+        font-family: 'Bellota';
+        font-size: 25px;
     }
 }
 

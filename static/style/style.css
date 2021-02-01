@@ -55,7 +55,9 @@
   font-display: swap;
 }
 body {
+  overflow: auto;
   margin: 0 !important;
+  position: relative;
 }
 
 a {
@@ -64,25 +66,53 @@ a {
   transition: 0.3s;
 }
 a:hover {
-  color: #b8b3b3;
+  opacity: 0.5;
 }
 
 .navbar-desktop {
+  position: fixed;
   padding: 0;
+  background-color: white;
+  min-width: 100%;
+  height: 15vh;
 }
 .navbar-desktop ul {
   margin: 0;
   padding: 0;
 }
 .navbar-desktop .navbar-head {
+  display: flex;
+  justify-content: center;
   width: 100%;
+  /*a {
+      display: flex;
+      justify-content: center;
+  }*/
 }
-.navbar-desktop .navbar-head a {
+.navbar-desktop .navbar-logo {
   display: flex;
   justify-content: center;
 }
-.navbar-desktop .navbar-logo {
-  width: 35%;
+.navbar-desktop .navbar-logo-logo {
+  background-image: url(../image/logo.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  min-width: 35vw;
+  height: 12vh;
+}
+.navbar-desktop .navbar-buttons {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+}
+.navbar-desktop .navbar-buttons .navbar-buttons-button {
+  width: 35px;
+}
+.navbar-desktop .navbar-buttons .navbar-buttons-button:hover {
+  opacity: 0.5;
 }
 
 .navbar-footer .navbar-links {
@@ -94,6 +124,11 @@ a:hover {
   display: inline-block;
   font-family: "Bellota";
   font-size: 25px;
+}
+
+.page-content {
+  display: block;
+  padding-top: 15vh;
 }
 
 .prodCard {

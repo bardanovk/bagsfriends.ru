@@ -39,7 +39,7 @@ async function start() {
             useUnifiedTopology: true
         })
         app.listen(PORT, () => {
-            console.log("server started")
+            console.log("Server started")
         })
     } catch (e) {
         console.log(e)

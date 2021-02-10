@@ -20,7 +20,7 @@ router.get('/login', async(req, res, next) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid))
         res.redirect('/manage')
     else
-        res.render('./pages/manage/login', { layout: 'manage' })
+        res.render('./pages/manage/login')
 
 })
 
@@ -33,6 +33,11 @@ router.post('/login', async(req, res) => {
     } else {
         res.redirect('/login')
     }
+})
+
+router.get('/logout', async(req, res) => {
+    res.clearCookie('sid');
+    res.redirect('/login')
 })
 
 router.get('/manage', (req, res) => {

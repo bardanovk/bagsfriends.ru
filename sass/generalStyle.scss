@@ -1,7 +1,12 @@
-//// COLORS
+//// COLORS ////////
 $color-footer:rgb(143, 140, 138);
 $color-footer-text: rgb(192, 192, 192);
+$color-login-form: #ebc166;
+$color-login-form-button:#ebc166;
+$color-login-form-button-hover:#fac34bc4;
+$color-login-form-button-active:#f7c0498c;
 ////
+///// ШРИФТЫ //////// 
 @font-face {
     font-family: 'Cyrillic Times ET';
     src: url('../fonts/CTETIT.eot');
@@ -66,114 +71,77 @@ $color-footer-text: rgb(192, 192, 192);
 }
 
 body {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     margin: 0 !important;
     position: relative;
+    width: 100vw;
+    height: 100vh;
     //font-family: 'Cyrillic Times ET';
     // background-color: grey;
 }
 
 .page-content {
     display: block;
-    padding-top: 15vh;
+    padding-top: 17.5vh;
 }
 
-
-/*.carousel {
-    position: relative;
-    overflow: hidden;
-    ul {
-        display: block;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        height: 450px;
-        width: 99999px;
-        font-size: 0;
-        li {
-            .background {
-                display: inline-block;
-                width: 1920px;
-                height: 450px;
-            }
-        }
-    }
-    .prev {
-        position: absolute;
-        left: 10px;
-    }
-    .next {
-        position: absolute;
-        right: 10px;
-    }
-}
-*/
-
-//////   КАРУСЕЛЬ
+//////   КАРУСЕЛЬ  ////////
 .carousel {
     position: relative;
     width: 100%;
     height: 450px;
     padding: 0;
+    img {
+        width: 1920px;
+        height: 450px;
+        /* делаем этот элемент блочным, чтобы убрать лишнее пространство вокруг картинок */
+        display: block;
+    }
+    .button {
+        position: absolute;
+        top: 0px;
+        height: 450px;
+        padding: 0;
+        display: block;
+        background-color: rgba(0, 0, 0, 0);
+        border: none;
+    }
+    .button:focus {
+        outline: none;
+    }
+    .button:hover {
+        cursor: pointer;
+    }
+    .prev {
+        width: 30%;
+        left: 0px;
+    }
+    .next {
+        width: 70%;
+        right: 0px;
+    }
+    .gallery {
+        width: 100%;
+        overflow: hidden;
+    }
+    .gallery ul {
+        height: 100%;
+        width: 99999px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        transition: margin-left 350ms;
+        /* удаляем пустое пространство между элементами li, у которых установлен inline-block */
+        /* http://davidwalsh.name/remove-whitespace-inline-block */
+        font-size: 0;
+    }
+    .gallery li {
+        display: inline-block;
+    }
 }
 
-.carousel img {
-    width: 1920px;
-    height: 450px;
-    /* делаем этот элемент блочным, чтобы убрать лишнее пространство вокруг картинок */
-    display: block;
-}
-
-.button {
-    position: absolute;
-    top: 0px;
-    height: 450px;
-    padding: 0;
-    display: block;
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-}
-
-.button:focus {
-    outline: none;
-}
-
-.button:hover {
-    cursor: pointer;
-}
-
-.prev {
-    width: 30%;
-    left: 0px;
-}
-
-.next {
-    width: 70%;
-    right: 0px;
-}
-
-.gallery {
-    width: 100%;
-    overflow: hidden;
-}
-
-.gallery ul {
-    height: 100%;
-    width: 99999px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    transition: margin-left 350ms;
-    /* удаляем пустое пространство между элементами li, у которых установлен inline-block */
-    /* http://davidwalsh.name/remove-whitespace-inline-block */
-    font-size: 0;
-}
-
-.gallery li {
-    display: inline-block;
-}
-
-////
+//// КАРТОЧКИ ТОВАРА ////////
 .prodCard {
     margin: 5px;
     padding: 5px;
@@ -187,12 +155,13 @@ body {
     background-color: #EE9191;
 }
 
+//// НАВ БАР СТРАНИЦ /////
 .navbar-desktop {
     position: fixed;
     z-index: 100;
     padding: 0;
     background-color: white;
-    min-width: 100%;
+    min-width: 100vw;
     height: 17.5vh;
     a {
         color: black;
@@ -254,9 +223,13 @@ body {
     }
 }
 
+////// ПОДВАЛ ////////
 .footer-desktop {
+    position: absolute;
+    top: 100vh;
     background-color: $color-footer;
     font-family: 'Bellota';
+    min-width: 80vw;
     padding: 2vh 10vw;
     a {
         color: black;
@@ -322,6 +295,74 @@ body {
             justify-content: center;
             font-size: 15px;
             color: $color-footer-text;
+        }
+    }
+}
+
+/// ФОРМА ЛОГИНА ////////
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 82.5vh;
+    font-family: 'Bellota';
+    .login-head {
+        font-size: 5vh;
+    }
+    .login-form {
+        width: 50vw;
+        height: 30vh;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-content: space-around;
+        background-color: $color-login-form;
+        p {
+            text-align: center;
+            display: block;
+            margin: 0;
+            margin-bottom: 2.5vh;
+            padding: 0;
+        }
+        input {
+            height: 5vh;
+            width: 25vw;
+            text-align: center;
+            text-justify: center;
+            font-size: 3.5vh;
+            border: none;
+            outline: none;
+            margin: 0;
+            padding: 0;
+        }
+        input:focus {
+            border: none;
+            outline: none;
+            padding: 0;
+            margin: 0;
+        }
+        button {
+            height: 2.5vh;
+            width: 10vw;
+            background-color: $color-login-form-button;
+            border: 2px solid $color-footer-text;
+        }
+        button:hover {
+            background-color: $color-login-form-button-hover;
+        }
+        button:focus {
+            border: 2px solid $color-footer-text;
+            outline: none;
+            outline-offset: 0;
+        }
+        button:active {
+            border: none;
+            outline: none;
+            outline-offset: 0;
+            background-color: $color-login-form-button-active;
         }
     }
 }

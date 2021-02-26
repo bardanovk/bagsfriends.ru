@@ -3,14 +3,16 @@ const router = Router()
 const Product = require('../models/product')
 const News = require('../models/news')
 const multer = require('multer')
-const photoRedirect = require('../middleware/photoRedirect')
-const photoNews = require('../middleware/photoNews')
+const productPhotoRedirect = require('../middleware/photoRedirect')
+const newsPhotoRedirect = require('../middleware/editorPhotoUpload')
 const verifyF2B = require('../middleware/verifyF2B')
 const verifyCookie = require('../middleware/verifyCookie')
 const config = require('../config/tokens')
 const options = require('../config/options')
 const cookieParser = require('cookie-parser')
 const hashCookie = require('../middleware/hashCookie')
+
+//const photoNews = require('../middleware/photoNews')
 
 const upload = multer({ dest: './tmp' })
 
@@ -68,8 +70,9 @@ router.get('/manage/products/create', (req, res) => {
 
 router.post('/manage/product/create', upload.array('photo'), async(req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
+        console.log('body', req.body);
         if (req.files.length != 0)
-            photoRedirect(req.files, req.body.prodTitle)
+            productPhotoRedirect(req.files, req.body.prodTitle)
         const checked = !!req.body.visible || false
         const product = new Product({
             prodTitle: req.body.prodTitle,
@@ -155,26 +158,53 @@ router.get('/manage/news/create', (req, res) => {
         res.redirect('/login')
 })
 
-router.post('/manage/news/create', upload.array('photo'), async(req, res) => {
+router.post('/manage/news/create', upload.single(null), async(req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
-        if (req.files.length != 0)
-            photoNews(req.files, req.body.newsTitle)
-        const checked = !!req.body.visible || false
-        const news = new News({
-            newsTitle: req.body.newsTitle,
-            category: req.body.category,
-            visible: checked,
-            text: req.body.text,
-            author: req.body.author
-        })
+        try {
 
-        // console.log('body', req.body)
-        //console.log('product', product)
+            //console.log('req', req.body);
+            const checked = !!req.body.visible || false
 
-        news.save()
-        res.redirect('/manage/products')
-    } else
+
+            const news = new News({
+                newsTitle: req.body.newsTitle,
+                category: req.body.category,
+                visible: checked,
+                text: req.body.data,
+                author: req.body.author
+            })
+
+            // console.log('body', req.body)
+            //console.log('product', product)
+
+            news.save()
+            res.redirect('/manage/news')
+        } catch (e) {
+            console.log(e);
+        }
+
+    } else {
         res.redirect('/login')
+    }
+})
+
+router.post('/manage/news/uploadPhoto', upload.single('image'), async(req, res) => {
+    if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
+        try {
+            newsPhotoRedirect(req.file)
+            res.status(201).json({
+                "success": 1,
+                "file": {
+                    "url": `http://localhost:3000/image/news/${req.file.filename}.jpg`,
+                }
+            });
+        } catch (err) {
+            console.log(err)
+        }
+    } else {
+        res.redirect('/login')
+    }
+    //console.log(req);
 })
 
 router.get('/manage/orders', (req, res) => {

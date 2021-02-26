@@ -8,4 +8,4 @@ const schema = new Schema({
     visible: { type: Boolean }
 })
 
-module.exports = model('news', schema)
+module.exports = model('News', schema)

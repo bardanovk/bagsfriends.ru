@@ -3,8 +3,9 @@ const path = require('path')
 
 
 
-const photoRedirect = (photos, prodTitle) => {
+const productPhotoRedirect = (photos, prodTitle) => {
     try {
+
         prodTitle = JSON.stringify(prodTitle)
         prodTitle = prodTitle.replace(/"/g, '')
 
@@ -58,4 +59,6 @@ const photoRedirect = (photos, prodTitle) => {
     }
 }
 
-module.exports = photoRedirect
+
+
+module.exports = productPhotoRedirect

@@ -18,7 +18,7 @@ const upload = multer({ dest: './tmp' })
 
 router.use(cookieParser(config.cookie))
 
-router.get('/login', async(req, res, next) => {
+router.get('/login', async (req, res, next) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid))
         res.redirect('/manage')
     else
@@ -26,7 +26,7 @@ router.get('/login', async(req, res, next) => {
 
 })
 
-router.post('/login', async(req, res) => {
+router.post('/login', async (req, res) => {
     //console.log(req.body, req.body.pass1, req.aborted.pass2, verifyF2B(req.body.pass1, req.body.pass2))
 
     if (verifyF2B(req.body.pass1, req.body.pass2)) {
@@ -37,7 +37,7 @@ router.post('/login', async(req, res) => {
     }
 })
 
-router.get('/logout', async(req, res) => {
+router.get('/logout', async (req, res) => {
     res.clearCookie('sid');
     res.redirect('/login')
 })
@@ -49,7 +49,7 @@ router.get('/manage', (req, res) => {
         res.redirect('/login')
 })
 
-router.get('/manage/products', async(req, res) => {
+router.get('/manage/products', async (req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
         const products = await Product.find({}).lean()
         res.render('./pages/manage/products', {
@@ -68,7 +68,7 @@ router.get('/manage/products/create', (req, res) => {
         res.redirect('/login')
 })
 
-router.post('/manage/product/create', upload.array('photo'), async(req, res) => {
+router.post('/manage/product/create', upload.array('photo'), async (req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
         console.log('body', req.body);
         if (req.files.length != 0)
@@ -106,34 +106,34 @@ router.get('/manage/products/edit', (req, res) => {
         res.redirect('/login')
 })
 
-router.get('/manage/products/edit/:id', async(req, res) => {
+router.get('/manage/products/edit/:id', async (req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
 
         const product = await Product.findById(req.params.id, (e) => {
-                if (e)
-                    console.log(e)
-            }).lean()
-            //console.log(typeof product.visible, product.visible)
+            if (e)
+                console.log(e)
+        }).lean()
+        //console.log(typeof product.visible, product.visible)
         res.render('./pages/manage/editProduct', { layout: 'manage', product })
 
     } else
         res.redirect('/login')
 })
 
-router.post('/manage/products/edit/:id', async(req, res) => {
+router.post('/manage/products/edit/:id', async (req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
         try {
             //console.log('body', req.body)
             let product = await Product.findById(req.params.id)
-                //console.log(product);
+            //console.log(product);
             const checked = !!req.body.visible || false
-                //console.log(checked);
+            //console.log(checked);
             product.prodTitle = req.body.prodTitle
             product.category = req.body.category
             product.price = req.body.price
             product.visible = checked
             product.description = req.body.description
-                //console.log(product)
+            //console.log(product)
             product.save()
         } catch (e) {
             console.log('UPDATE PRODUCT ERROR', e);
@@ -143,9 +143,9 @@ router.post('/manage/products/edit/:id', async(req, res) => {
         res.redirect('/login')
 })
 
-router.get('/manage/news', (req, res) => {
+router.get('/manage/news', async (req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
-        const news = News.find({})
+        const news = await News.find({}).lean()
         res.render('./pages/manage/news', { layout: 'manage', news })
     } else
         res.redirect('/login')
@@ -158,7 +158,7 @@ router.get('/manage/news/create', (req, res) => {
         res.redirect('/login')
 })
 
-router.post('/manage/news/create', upload.single(null), async(req, res) => {
+router.post('/manage/news/create', upload.single(null), async (req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
         try {
 
@@ -188,7 +188,7 @@ router.post('/manage/news/create', upload.single(null), async(req, res) => {
     }
 })
 
-router.post('/manage/news/uploadPhoto', upload.single('image'), async(req, res) => {
+router.post('/manage/news/uploadPhoto', upload.single('image'), async (req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
         try {
             newsPhotoRedirect(req.file)

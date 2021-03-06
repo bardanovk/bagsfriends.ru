@@ -2,7 +2,6 @@ node_modules
 temple
 config/tokens.js
 static/image/products/Сумка/Main.jpg
-static/fonts/*
 notes.js
 notes.js
 static/style/manageStyle.css
@@ -35,3 +34,7 @@ static/image/news/b060157370fad68fd538d938dc6bb935.jpg
 static/image/news/1b159fdbb61ef4a22a79df96acbc6f95.jpg
 static/image/news/4e4daa134a7d5d889fdae380e5403eef.jpg
 static/image/news/c967c0736ad01faa2e699ed7ae038766.jpg
+static/style/style.css
+static/image/news/5866258580d0ad29dc36045022b70c86.jpg
+notes.json
+static/style/style.css

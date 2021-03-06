@@ -1,0 +1,69 @@
+.postText {
+    .postTitle {
+        font-size: 40px;
+        font-weight: bold;
+    }
+    font-family: 'Bellota';
+    font-weight: 500;
+    padding: 0 25%;
+    .postYoutube,
+    .postImage,
+    .postInstagram {
+        margin: 25px 0;
+        display: flex;
+        justify-content: center;
+    }
+    .postImage {
+        border: black solid 1px;
+    }
+    .caption {
+        display: block;
+        text-align: center;
+    }
+    .postParagraph,
+    .postUl,
+    .postOl {
+        font-size: 1.7em;
+        font-weight: lighter;
+    }
+    .postImage {
+        width: 100%;
+        height: 600px;
+        .image {
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: center
+        }
+    }
+    .postUl li {
+        list-style: circle;
+    }
+    .postHeader {
+        font-weight: bold;
+    }
+    .postHeader h1 {
+        font-size: 2.2em;
+    }
+    .postHeader h2 {
+        font-size: 2em;
+    }
+    .postHeader h3 {
+        font-size: 1.8em;
+    }
+    .postHeader h4 {
+        font-size: 1.7em;
+    }
+    .postHeader h5 {
+        font-size: 1.6em;
+    }
+    .postHeader h6 {
+        font-size: 1.5em;
+    }
+    .postDate {
+        width: 100%;
+        text-align: end;
+        font-style: italic;
+        margin-bottom: 30px;
+    }
+}

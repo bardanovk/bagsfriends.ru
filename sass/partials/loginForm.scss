@@ -1,0 +1,70 @@
+$color-login-form: #ebc166;
+$color-login-form-button:#ebc166;
+$color-login-form-button-hover:#fac34bc4;
+$color-login-form-button-active:#f7c0498c;
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 82.5vh;
+    font-family: 'Bellota';
+    .login-head {
+        font-size: 5vh;
+    }
+    .login-form {
+        width: 50vw;
+        height: 30vh;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-content: space-around;
+        background-color: $color-login-form;
+        p {
+            text-align: center;
+            display: block;
+            margin: 0;
+            margin-bottom: 2.5vh;
+            padding: 0;
+        }
+        input {
+            height: 5vh;
+            width: 25vw;
+            text-align: center;
+            text-justify: center;
+            font-size: 3.5vh;
+            border: none;
+            outline: none;
+            margin: 0;
+            padding: 0;
+        }
+        input:focus {
+            border: none;
+            outline: none;
+            padding: 0;
+            margin: 0;
+        }
+        button {
+            height: 2.5vh;
+            width: 10vw;
+            background-color: $color-login-form-button;
+            border: 2px solid $color-footer-text;
+        }
+        button:hover {
+            background-color: $color-login-form-button-hover;
+        }
+        button:focus {
+            border: 2px solid $color-footer-text;
+            outline: none;
+            outline-offset: 0;
+        }
+        button:active {
+            border: none;
+            outline: none;
+            outline-offset: 0;
+            background-color: $color-login-form-button-active;
+        }
+    }
+}

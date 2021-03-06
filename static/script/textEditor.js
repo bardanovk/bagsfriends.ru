@@ -52,5 +52,6 @@ function OnSave() {
         outputDataText = JSON.stringify(outputData)
         document.getElementById('data').value = outputDataText
         console.log('art', outputData);
+        alert('Статья отредактирована')
     })
 }

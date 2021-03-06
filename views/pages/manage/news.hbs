@@ -9,6 +9,8 @@
     {{#each news}}
     <li>
         {{ newsTitle }}
+        {{ category }}
+        <span> <a href="./news/edit/{{_id}}"><button type="button">edit</button></a></span>
     </li>
     {{/each}}
 </ul>

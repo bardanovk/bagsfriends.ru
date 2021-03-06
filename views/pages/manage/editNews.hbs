@@ -1,0 +1,76 @@
+<h1>Редактировать новость</h1>
+<div class="editorJsBlock">
+    <div id="editorjs"></div>
+    <button class="editorJsButton" onclick="OnSave()">save</button>
+</div>
+<form action="/manage/news/edit/{{news._id}}" method="POST" enctype="multipart/form-data">
+    <span>Имя: </span><input type="text" name="newsTitle" value="{{news.newsTitle}}"><br>
+    <span>Категории: </span><input type="text" name="category" value="{{news.category}}"><br>
+    <input id="data" type="text" name="data" hidden value="{{news.text}}">
+    {{#if news.visible}}
+    <span>Видимость: </span><input type="checkbox" name="visible" checked><br>
+    {{else}}
+    <span>Видимость: </span><input type="checkbox" name="visible"><br>
+    {{/if}}
+    <button type="submit">Сохранить</button>
+</form>
+
+{{> editorjs}}
+
+<script>
+    const editor = new EditorJS({
+        /** 
+         * Id of Element that should contain the Editor 
+         */
+        holder: 'editorjs',
+
+        /** 
+         * Available Tools list. 
+         * Pass Tool's class or Settings object for each Tool you want to use 
+         */
+        tools: {
+            header: {
+                class: Header,
+                inlineToolbar: ['link']
+            },
+            image: {
+                class: ImageTool,
+                config: {
+                    endpoints: {
+                        byFile: 'http://localhost:3000/manage/news/uploadPhoto', // Your backend file uploader endpoint
+                        byUrl: 'http://localhost:8008/fetchUrl', // Your endpoint that provides uploading by Url
+                    }
+                }
+            },
+
+            list: {
+                class: List,
+                inlineToolbar: true,
+            },
+            embed: {
+                class: Embed,
+                config: {
+                    services: {
+                        youtube: true,
+                        coub: true,
+                        instagram: true
+                    }
+
+                },
+            },
+
+        },
+        data: {{{ news.text }}}
+    })
+
+    function OnSave() {
+
+        editor.save().then((outputData) => {
+
+            outputDataText = JSON.stringify(outputData)
+            document.getElementById('data').value = outputDataText
+            console.log('art', outputData);
+            alert('Статья отредактирована')
+        })
+    }
+</script>

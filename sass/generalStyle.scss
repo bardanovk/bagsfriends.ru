@@ -5,8 +5,7 @@ $color-footer-text: rgb(192, 192, 192);
 @import 'partials/postNews';
 @import 'fonts';
 @import 'partials/loginForm';
-//// COLORS ////////
-////
+@import 'partials/carousel';
 body {
     overflow-y: auto;
     overflow-x: hidden;

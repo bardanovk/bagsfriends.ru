@@ -1,11 +1,11 @@
 $color-footer:rgb(143, 140, 138);
 $color-footer-text: rgb(192, 192, 192);
-@import 'partials/footer';
-@import 'partials/navBar';
-@import 'partials/postNews';
+@import 'partials/public/footer';
+@import 'partials/public/navBar';
+@import 'partials/public/postNews';
 @import 'fonts';
-@import 'partials/loginForm';
-@import 'partials/carousel';
+@import 'partials/public/loginForm';
+@import 'partials/public/carousel';
 body {
     overflow-y: auto;
     overflow-x: hidden;

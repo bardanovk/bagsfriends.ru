@@ -1,4 +1,5 @@
 const express = require('express')
+const hbsHelpers = require('handlebars-helpers')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const pageRoutes = require('./routes/pages.route')
@@ -13,11 +14,12 @@ const router = require('./routes/manage.route')
 const PORT = process.env.PORT || 3000
 
 const app = express()
+
 const hbs = exphbs.create({
     defaultLayout: 'main',
-    extname: 'hbs'
+    extname: 'hbs',
+    helpers: hbsHelpers()
 })
-
 
 
 app.engine('hbs', hbs.engine)

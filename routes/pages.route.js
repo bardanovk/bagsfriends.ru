@@ -1,10 +1,11 @@
 const { Router } = require('express')
 const News = require('../models/news')
-const router = Router()
 const Product = require('../models/product')
 const cookieParser = require('cookie-parser')
 const config = require('../config/tokens')
+const dateParse = require('../middleware/dateParser')
 
+const router = Router()
 
 router.use(cookieParser(config.cookie))
 
@@ -33,10 +34,15 @@ router.get('/blog', async(req, res) => {
 })
 
 router.get('/blog/news/:id', async(req, res) => {
-    const news = await News.findById(req.params.id).lean()
-    const text = JSON.parse(news.text).blocks
-    console.log(JSON.stringify(text));
-    res.render('./pages/public/newsPage', { title: 'Новости мастерской', news, text })
+    try {
+        const news = await News.findById(req.params.id).lean()
+        const text = JSON.parse(news.text).blocks
+        const postDate = dateParse(news.date)
+        res.render('./pages/public/newsPage', { title: 'Новости мастерской', news, text, postDate })
+    } catch (e) {
+        console.log(e)
+        res.redirect('../')
+    }
 })
 
 router.get('/contact', (req, res) => {

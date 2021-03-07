@@ -5,6 +5,7 @@ const schema = new Schema({
     category: { type: Array, required: true },
     text: { type: String },
     date: { type: Date, default: Date.now() },
+    discription: { type: String },
     visible: { type: Boolean }
 })
 

@@ -29,7 +29,7 @@ router.get('/info', (req, res) => {
 })
 
 router.get('/blog', async(req, res) => {
-    const news = await News.find({ visible: true }).lean()
+    const news = await News.find({ visible: true }).lean().sort({ date: -1 })
     res.render('./pages/public/blog', { title: 'Новости мастерской', news })
 })
 

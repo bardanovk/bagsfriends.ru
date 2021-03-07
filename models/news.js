@@ -6,7 +6,8 @@ const schema = new Schema({
     text: { type: String },
     date: { type: Date, default: Date.now() },
     discription: { type: String },
-    visible: { type: Boolean }
+    visible: { type: Boolean },
+    views: { type: Number, default: 0 }
 })
 
 module.exports = model('News', schema)

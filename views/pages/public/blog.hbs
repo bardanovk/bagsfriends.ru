@@ -1,11 +1,15 @@
-<h1>blog</h1>
+<div class="blog-content">
+    <div class="blog-title">
+        <h1>Новости мастерской Алены Суворовой</h1>
+    </div>
 
-{{#if news.length}}
-
-{{#each news}}
-
-<li><a href="/blog/news/{{ _id}}">{{ newsTitle }}</a></li>
-{{/each}}
-{{else}}
-Новостей пока нету
-{{/if}}
+    {{#if news.length}}
+    <ul class="blog-ul">
+        {{#each news}}
+        {{> blogLi}}
+        {{/each}}
+    </ul>
+    {{else}}
+    Новостей пока нету :(
+    {{/if}}
+</div>

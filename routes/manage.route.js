@@ -40,7 +40,7 @@ router.post('/login', async(req, res) => {
 
 router.get('/logout', async(req, res) => {
     res.clearCookie('sid');
-    res.redirect('/login')
+    res.redirect('/')
 })
 
 router.get('/manage', (req, res) => {
@@ -83,15 +83,14 @@ router.post('/manage/product/create', upload.array('photo'), async(req, res) => 
             description: req.body.description
         })
 
-        // console.log('body', req.body)
-        // console.log('product', product)
-
         product.save()
         res.redirect('/manage/products')
     } else
         res.redirect('/login')
 })
 
+
+/*
 router.get('/manage/products/edit', (req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
         prodId = req.body.prodId
@@ -102,11 +101,12 @@ router.get('/manage/products/edit', (req, res) => {
             res.render('./pages/manage/editProduct', { layout: 'manage' })
         } catch (e) {
             console.log(e)
+            res.redirect('../')
         }
     } else
         res.redirect('/login')
 })
-
+*/
 router.get('/manage/products/edit/:id', async(req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
 
@@ -160,14 +160,24 @@ router.get('/manage/news/create', (req, res) => {
 router.post('/manage/news/create', upload.single(null), async(req, res) => {
     if (req.signedCookies.sid && verifyCookie(req, req.signedCookies.sid)) {
         try {
-
             const checked = !!req.body.visible || false
+            let description
+            try {
+                const editorJsData = JSON.parse(req.body.data).blocks
+                for (let i = 0; i < editorJsData.length; i++) {
+                    if (editorJsData[i].type == 'paragraph') {
+                        description = String(editorJsData[i].data.text).substr(0, 150)
+                    }
+                }
+            } catch (e) {
+                console.log(e);
+            }
             const news = new News({
                 newsTitle: req.body.newsTitle,
                 category: req.body.category,
                 visible: checked,
                 text: req.body.data,
-                author: req.body.author
+                description: description
             })
             news.save()
             res.redirect('/manage/news')
@@ -189,7 +199,6 @@ router.get('/manage/news/edit/:id', async(req, res) => {
         }).lean()
 
         const data = JSON.parse(news.text)
-        console.log(typeof(data), data);
         res.render('./pages/manage/editNews', { layout: 'manage', news, data })
 
     } else
@@ -231,7 +240,6 @@ router.post('/manage/news/uploadPhoto', upload.single('image'), async(req, res) 
     } else {
         res.redirect('/login')
     }
-    //console.log(req);
 })
 
 router.get('/manage/orders', (req, res) => {

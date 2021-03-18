@@ -35,10 +35,12 @@ router.get('/blog', async(req, res) => {
 
 router.get('/blog/news/:id', async(req, res) => {
     try {
-        const news = await News.findById(req.params.id).lean()
+        let news = await News.findById(req.params.id).lean()
+        let newViews = news.views + 1
+        await News.findByIdAndUpdate(req.params.id, { views: newViews })
         const text = JSON.parse(news.text).blocks
-        const postDate = dateParse(news.date)
-        res.render('./pages/public/newsPage', { title: 'Новости мастерской', news, text, postDate })
+            //const postDate = dateParse(news.date)
+        res.render('./pages/public/newsPage', { title: news.newsTitle, news, text })
     } catch (e) {
         console.log(e)
         res.redirect('../')

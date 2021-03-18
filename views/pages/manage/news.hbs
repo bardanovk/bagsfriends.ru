@@ -2,18 +2,39 @@
 
 <a href="/manage/news/create"><button>Создать новость</button></a>
 
-
 {{#if news.length}}
-
+{{!--
 <ul>
     {{#each news}}
     <li>
         {{ newsTitle }}
         {{ category }}
-        <span> <a href="./news/edit/{{_id}}"><button type="button">edit</button></a></span>
+        <span>
+            {{!-- <form action="/manage/news/delete/{{_id}}" method="POST" style="display: inline-block;">
+                <button type="submit">delete</button>
+            </form>
+        </span>
     </li>
     {{/each}}
-</ul>
+</ul> --}}
+
+<table class="manage-table">
+    <tr class="manage-table-header">
+        <th>Название статьи</th>
+        <th>Категория</th>
+        <th>Просмотр</th>
+        <th>Редактировать</th>
+
+    </tr>
+    {{#each news}}
+    <tr>
+        <th>{{newsTitle}}</th>
+        <th>{{category}}</th>
+        <th><a href="../../../blog/news/{{_id}}" target="_blank"><button>Просмотр</button></a></th>
+        <th><a href="/manage/news/edit/{{_id}}"><button type="button">edit</button></a></th>
+    </tr>
+    {{/each}}
+</table>
 {{else}}
 <h3>Новостей нет!</h3>
 {{/if}}

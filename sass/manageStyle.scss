@@ -1,8 +1,23 @@
 button {
     font: bold;
-    font-size: 30px;
+    font-size: 15px;
 }
 
 .editorJsBlock {
     background-color: burlywood;
+}
+
+.manage-table {
+    margin: 0 auto;
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid black;
+    th {
+        padding: 5px;
+        border: 1px solid black;
+    }
+}
+
+.manage-table-header {
+    font-size: 20px;
 }

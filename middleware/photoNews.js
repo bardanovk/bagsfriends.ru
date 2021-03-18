@@ -1,22 +1,18 @@
 const fs = require('fs')
 const path = require('path')
 
-const photoRedirect = (photos, newsTitle) => {
+const photoRedirect = (photo, newsTitle) => {
+
     try {
         newsTitle = JSON.stringify(newsTitle)
         newsTitle = newsTitle.replace(/"/g, '')
 
-        const dirPath = path.join(__dirname, `../static/image/news/${newsTitle}/`)
+        const dirPath = path.join(__dirname, `../static/image/news/labels/`)
         const tmpPath = path.join(__dirname, '../tmp/')
 
         fs.mkdirSync(dirPath, { recursive: true })
+        readAndWrite(photo, newsTitle, dirPath, tmpPath)
 
-        readAndWrite(photos[0], 'Main', dirPath, tmpPath)
-
-        for (i = 1; i < photos.length; i++) {
-            elemenet = photos[i]
-            readAndWrite(elemenet, '' + i, dirPath, tmpPath)
-        }
         clearTmp(tmpPath)
 
     } catch (err) {
@@ -25,8 +21,8 @@ const photoRedirect = (photos, newsTitle) => {
 
     async function readAndWrite(file, endFileName, dirPath, tmpPath) {
         try {
-            const fileName = file.filename
-            const data = fs.readFileSync(tmpPath + fileName)
+            const data = fs.readFileSync(tmpPath + file.filename)
+                // console.log('data', data);
             fs.writeFileSync(dirPath + endFileName + '.jpg', data, { flag: 'a' })
         } catch (err) {
             console.log('PHOTO REDIRECT ERROR', err)

@@ -21,5 +21,43 @@
                 opacity: .5;
             }
         }
+        .post-title {
+            font-size: 30px;
+        }
+        .post-image {
+            width: 250px;
+            height: 250px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .blog-li {
+            padding: 2% 1%;
+            background-color: rgb(138, 221, 221);
+            margin-bottom: 15px;
+        }
+        .blog-li-bottom {
+            opacity: .5;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 25px;
+            padding-left: 65%;
+            .postDate {
+                font-style: italic;
+            }
+        }
+        .views-icon {
+            width: 15px;
+            height: 15px;
+            background-image: url('../../image/icon-views-eye.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .li-views {
+            display: flex;
+            justify-content: space-between;
+        }
     }
 }

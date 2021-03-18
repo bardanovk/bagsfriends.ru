@@ -2,7 +2,17 @@
 
 <form action="/manage/products/edit/{{product._id}}" method="POST">
     <span>Имя: </span><input type="text" name="prodTitle" value="{{product.prodTitle}}"><br>
-    <span>Категории: </span><input type="text" name="category" value="{{product.category}}"><br>
+    <span>Категории: </span><select name="" id="selectCategory">
+        <option value="0" selected disabled>Выберите категорию</option>
+        <option value="Мужское">Мужское</option>
+        <option value="Женское">Женское</option>
+        <option value="Сумки">Сумки</option>
+        <option value="Кошельки">Кошельки</option>
+        <option value="Портмоне">Портмоне</option>
+        <option value="Ремни">Ремни</option>
+        <option value="Аксессуары">Аксессуары</option>
+    </select>
+    <input type="text" name="category" id="catInput" placeholder="Категории" readonly value="{{product.category}}"><br>
     <span>Цена: </span><input type="text" name="price" value="{{product.price}}"><br>
     <span>Описание: </span><input type="text" name="description" value="{{product.description}}"><br>
     <span>Фото: </span><input type="file" name="photo" multiple accept=".jpg"><br>
@@ -13,3 +23,25 @@
     {{/if}}
     <button type="submit">Сохранить</button>
 </form>
+
+
+<script>
+    const selector = document.getElementById('selectCategory')
+    const catInput = document.getElementById('catInput')
+    const catDB = `{{ product.category }}`
+
+    window.onload = () => {
+        catInput.value = catDB.replaceAll(',', ' # ')
+    }
+    selector.addEventListener('change', () => {
+        let cat = selector.value
+        console.log(cat)
+        console.log(catInput.value.includes(cat + ' # '))
+        if (catInput.value.includes(cat + ' # '))
+            catInput.value = catInput.value.replace(cat + ' # ', '')
+        //console.log(cat)
+        else
+            catInput.value += cat + ' # '
+        selector.value = 0
+    })
+</script>

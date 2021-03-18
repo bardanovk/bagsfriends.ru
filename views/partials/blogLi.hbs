@@ -5,12 +5,14 @@
             </a>
         </div>
         <div class="blog-li-content">
-            <div class="post-image"></div>
+            <div class="post-image" style="background-image: url(../../image/news/labels/{{newsTitle}}.jpg);"></div>
 
-            <p class="post-description">{{news.description}}</p>
+            <p class="post-description">{{discription}}</p>
         </div>
         <div class="blog-li-bottom">
-            <a href="/blog/news/{{_id}}">Подробне...</a>
+            <a href="/blog/news/{{_id}}">Подробнeе...</a> | <div class="views-icon"></div>
+            <div class="li-views">{{views}}</div> | <div class="postDate">{{newsDate}}</div>
         </div>
     </div>
+
 </li>

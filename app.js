@@ -35,11 +35,19 @@ app.use(express.static(path.join(__dirname, 'static')))
 async function start() {
     try {
         sassCompile()
-        await mongoose.connect('mongodb+srv://bardanovk:qR7uSwllQKAx5WNH@claster0.tkdrl.mongodb.net/Content?retryWrites=true&w=majority', {
-            useNewUrlParser: true,
-            useFindAndModify: true,
-            useUnifiedTopology: true
-        })
+        console.log('Conecting database...');
+        try {
+            await mongoose.connect('mongodb+srv://bardanovk:qR7uSwllQKAx5WNH@claster0.tkdrl.mongodb.net/Content?retryWrites=true&w=majority', {
+                useNewUrlParser: true,
+                useFindAndModify: true,
+                useUnifiedTopology: true
+            })
+            console.log('Successful connection to database');
+        } catch (e) {
+            console.log('Conection database error');
+            console.log(e);
+        }
+
         app.listen(PORT, () => {
             console.log("Server started")
         })

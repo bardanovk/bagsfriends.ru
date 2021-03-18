@@ -7,6 +7,7 @@ $color-footer-text: rgb(192, 192, 192);
 @import 'partials/public/other/loginForm';
 @import 'partials/public/mainPage/carousel';
 @import 'partials/public/blog/blog';
+@import 'partials/public/general/scroll';
 body {
     overflow-y: auto;
     overflow-x: hidden;
@@ -14,6 +15,7 @@ body {
     position: relative;
     width: 100vw;
     height: 100vh;
+    // background-color: blue;
     //font-family: 'Cyrillic Times ET';
     // background-color: grey;
 }

@@ -11,8 +11,7 @@ const newsPhotoRedirect = (file) => {
 
     async function readAndWrite(file, dirPath, tmpPath) {
         try {
-            const fileName = file.filename
-            const data = fs.readFileSync(tmpPath + fileName)
+            const data = fs.readFileSync(tmpPath + filename)
             fs.writeFileSync(dirPath + fileName + '.jpg', data, { flag: 'a' })
         } catch (err) {
             console.log('NEWS PHOTO REDIRECT ERROR', err)

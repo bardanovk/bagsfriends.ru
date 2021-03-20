@@ -1,0 +1,64 @@
+.catalog {
+    display: flex;
+    height: 185vh;
+    width: 100vw;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.catalog-group {
+    height: 60vh;
+    width: 49vw;
+    margin: 0 auto;
+    background-color: blueviolet;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    transition: .5s;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    &:hover {
+        opacity: .7;
+        background-size: 105%;
+    }
+    a {
+        font-family: 'Bellota';
+        text-decoration: none;
+        padding: 15px 150px;
+        font-size: 30px;
+        color: white;
+        border: white solid 5px;
+    }
+}
+
+.catalog-column {
+    display: inline-block;
+    height: 1700px;
+}
+
+.catalog-womans {
+    background-image: url('../image/catalog-womans.jpg');
+}
+
+.catalog-mens {
+    background-image: url('../image/catalog-mens.jpg');
+}
+
+.catalog-bags {
+    background-image: url('../image/catalog-bags.jpg');
+}
+
+.catalog-wallet {
+    background-image: url('../image/catalog-wallet.jpg');
+}
+
+.catalog-access {
+    background-image: url('../image/catalog-access.jpg');
+}
+
+.catalog-belt {
+    background-image: url('../image/catalog-belt.jpg');
+}

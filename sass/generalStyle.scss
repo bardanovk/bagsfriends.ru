@@ -8,6 +8,7 @@ $color-footer-text: rgb(192, 192, 192);
 @import 'partials/public/mainPage/carousel';
 @import 'partials/public/blog/blog';
 @import 'partials/public/general/scroll';
+@import 'partials/public/shop/catalog.scss';
 body {
     overflow-y: auto;
     overflow-x: hidden;
@@ -24,6 +25,7 @@ body {
     display: block;
     padding-top: 17.5vh;
     min-height: 100vh;
+    transition: .5s;
 }
 
 //////   КАРУСЕЛЬ  ////////

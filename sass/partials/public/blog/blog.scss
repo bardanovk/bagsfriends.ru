@@ -23,18 +23,32 @@
         }
         .post-title {
             font-size: 30px;
+            padding-bottom: 10px;
+        }
+        .blog-li-content {
+            display: flex;
+            flex-wrap: wrap;
         }
         .post-image {
             width: 250px;
             height: 250px;
+            margin: 0 !important;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
         }
+        .post-description {
+            text-align: justify;
+            max-width: 65%;
+            margin: 0 auto;
+        }
         .blog-li {
-            padding: 2% 1%;
+            position: relative;
+            padding: 2% 2%;
+            padding-bottom: 30px;
             background-color: rgb(138, 221, 221);
             margin-bottom: 15px;
+            // min-height: 370px;
         }
         .blog-li-bottom {
             opacity: .5;
@@ -42,7 +56,12 @@
             justify-content: space-around;
             align-items: center;
             height: 25px;
-            padding-left: 65%;
+            // padding-right: 5%;
+            max-width: 500px;
+            min-width: 300px;
+            // float: right;
+            position: absolute;
+            right: 5px;
             .postDate {
                 font-style: italic;
             }

@@ -1,5 +1,6 @@
 .postText {
     .postTitle {
+        position: relative;
         text-align: center;
         font-size: 40px;
         font-weight: bold;
@@ -15,11 +16,12 @@
         justify-content: center;
     }
     .postImage {
-        border: black solid 1px;
+        // border: black solid 1px;
     }
     .caption {
         display: block;
         text-align: center;
+        margin-bottom: 10vh;
     }
     .postParagraph,
     .postUl,
@@ -28,13 +30,27 @@
         font-weight: lighter;
     }
     .postImage {
-        width: 100%;
-        height: 600px;
         .image {
+            margin-top: 10vh 0;
+            border: black solid 1px;
+            max-width: 100%;
+            height: auto;
+            // background-repeat: no-repeat;
+            // background-position: center;
+            // background-size: cover;
+        }
+    }
+    .postYoutube {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding-bottom: 56.25%;
+        .youtube {
+            position: absolute;
+            left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background-repeat: no-repeat;
-            background-position: center
         }
     }
     .postUl li {

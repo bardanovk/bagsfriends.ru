@@ -1,0 +1,14 @@
+{{#if category.length}}
+<div class="catalog-navbar">
+    <ul class="catalog-navbar-ul">
+        <li><a {{#eq category 'woman' }} class="active" {{/eq}} href="/shop/catalog/woman">Женское</a></li>
+        <li><a {{#eq category 'man' }} class="active" {{/eq}} href="/shop/catalog/man">Мужское</a></li>
+        <li><a {{#eq category 'bags' }} class="active" {{/eq}} href="/shop/catalog/bags">Сумки</a></li>
+        <li><a {{#eq category 'wallets' }} class="active" {{/eq}} href="/shop/catalog/wallets">Портмоне | Кошельки</a>
+        </li>
+        <li><a {{#eq category 'accessories' }} class="active" {{/eq}} href="/shop/catalog/accessories">Аксессуары</a>
+        </li>
+        <li><a {{#eq category 'belts' }} class="active" {{/eq}} href="/shop/catalog/belts">Ремни</a></li>
+    </ul>
+</div>
+{{/if}}

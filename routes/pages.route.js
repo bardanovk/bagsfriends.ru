@@ -4,6 +4,8 @@ const Product = require('../models/product')
 const cookieParser = require('cookie-parser')
 const config = require('../config/tokens')
 const dateParse = require('../middleware/dateParser')
+const product = require('../models/product')
+const catalogTitle = require('../middleware/catalogTitleParser')
 
 const router = Router()
 
@@ -36,8 +38,8 @@ router.get('/blog', async(req, res) => {
 router.get('/blog/news/:id', async(req, res) => {
     try {
         let news = await News.findById(req.params.id).lean()
-        let newViews = news.views + 1
-        await News.findByIdAndUpdate(req.params.id, { views: newViews })
+        let newsViews = news.views + 1
+        await News.findByIdAndUpdate(req.params.id, { views: newsViews })
         const text = JSON.parse(news.text).blocks
             //const postDate = dateParse(news.date)
         res.render('./pages/public/newsPage', { title: news.newsTitle, news, text })
@@ -47,10 +49,21 @@ router.get('/blog/news/:id', async(req, res) => {
     }
 })
 
+router.get('/shop/catalog/:category', async(req, res) => {
+    try {
+        // console.log(req.params.category)
+        const products = await Product.find({ category: req.params.category }).lean()
+            // console.log(products)
+        res.render('./pages/public/catalog', { products, title: catalogTitle(req.params.category), category: req.params.category })
+    } catch (e) {
+        console.log(e)
+        res.redirect('/')
+    }
+})
+
 router.get('/contact', (req, res) => {
     res.render('./pages/public/contact', { title: 'Контакты' })
 })
-
 
 ///// API test
 

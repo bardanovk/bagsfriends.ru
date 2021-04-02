@@ -62,3 +62,52 @@
 .catalog-belt {
     background-image: url('../image/catalog-belt.jpg');
 }
+
+.catalog-navbar {
+    position: relative;
+    background-color: rgb(236, 235, 235);
+    width: 100%;
+    transition: .5s;
+    font-size: 20px;
+    ul {
+        padding: 3vh 0;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: space-around;
+        list-style: none;
+        li {
+            list-style: none;
+            .active {
+                color: red;
+            }
+            a {
+                color: black;
+                text-decoration: none;
+                font-family: 'Bellota';
+                transition: .5s;
+                &:hover {
+                    opacity: .5;
+                }
+            }
+        }
+    }
+}
+
+.product-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    .product-card {
+        .product-image {
+            width: 15vw;
+            height: 15vw;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            transition: .2s;
+        }
+        .product-title {}
+        .product-price {}
+    }
+}

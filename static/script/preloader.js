@@ -1,10 +1,11 @@
 let arr
 let arrl
-let pc
 window.onload = () => {
     document.querySelector('body').style = "display: block"
     arr = document.querySelectorAll('.navbar-buttons-button')
     arrl = document.querySelectorAll('.navbar-link')
+    if (!document.querySelector('.catalog-navbar'))
+        document.querySelector('.page-content').style.paddingTop = '17.5vh'
 }
 
 window.addEventListener('scroll', () => {
@@ -20,6 +21,8 @@ window.addEventListener('scroll', () => {
             element.classList.add('header-buttons-minimal')
         });
         document.querySelector('.page-content').classList.add('page-content-minimal')
+        if (document.querySelector('.catalog-navbar'))
+            document.querySelector('.catalog-navbar-ul').classList.add('catalog-navbar-ul-minimal')
     } else {
         document.getElementById('header').classList.remove('header-minimal')
         document.getElementById('header-logo').classList.remove('header-minimal-logo')
@@ -31,5 +34,7 @@ window.addEventListener('scroll', () => {
         });
         document.querySelector('.navbar-link').classList.remove('navbar-links-minimal')
         document.querySelector('.page-content').classList.remove('page-content-minimal')
+        if (document.querySelector('.catalog-navbar'))
+            document.querySelector('.catalog-navbar-ul').classList.remove('catalog-navbar-ul-minimal')
     }
 })

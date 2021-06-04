@@ -33,7 +33,7 @@ router.get('/login', async (req, res, next) => {
 router.post('/login', async (req, res) => {
     console.log(req.body, req.body.pass1, req.body.pass2, verifyF2B(req.body.pass1, req.body.pass2))
     if (verifyF2B(req.body.pass1, req.body.pass2)) {
-        res.cookie('sid', await hashCookie(req), options.admCookieOptions)
+        await res.cookie('sid', await hashCookie(req), options.admCookieOptions)
         res.redirect('/manage')
     } else {
         res.redirect('/login')

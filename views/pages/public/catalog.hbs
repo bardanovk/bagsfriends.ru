@@ -5,20 +5,22 @@
 {{#if products.length}}
 <div class="product-container">
     {{#each products}}
-    <div class="product-card">
-        <div class="product-image" id="product-{{_id}}"></div>
-        <div class="product-title">{{prodTitle}}</div>
-        <div class="product-price">{{price}}</div>
-        <style>
-            #product-{{_id}}{
-                background-image: url(../../../image/products/{{prodTitle}}/Main.jpg)
-            }
+    <a class="product-card-link" href="../../../../shop/product/{{_id}}">
+        <div class="product-card">
+            <div class="product-image" id="product-{{_id}}"></div>
+            <div class="product-title">{{prodTitle}}</div>
+            <div class="product-price">{{price}} ₽</div>
+            <style>
+                #product-{{_id}}{
+                    background-image: url(../../../image/products/{{prodTitle}}/Main.jpg)
+                }
 
-            #product-{{_id}}:hover {
-                background-image: url(../../../image/products/{{prodTitle}}/1.jpg)
-            }
-        </style>
-    </div>
+                #product-{{_id}}:hover {
+                    background-image: url(../../../image/products/{{prodTitle}}/1.jpg)
+                }
+            </style>
+        </div>
+    </a> 
     {{/each}}
 </div>
 {{else}}

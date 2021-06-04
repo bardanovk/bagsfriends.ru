@@ -6,6 +6,8 @@ const config = require('../config/tokens')
 const dateParse = require('../middleware/dateParser')
 const product = require('../models/product')
 const catalogTitle = require('../middleware/catalogTitleParser')
+const fs = require('fs')
+const Order = require('../models/order')
 
 const router = Router()
 
@@ -52,11 +54,23 @@ router.get('/blog/news/:id', async(req, res) => {
 router.get('/shop/catalog/:category', async(req, res) => {
     try {
         // console.log(req.params.category)
-        const products = await Product.find({ category: req.params.category }).lean()
+        const products = await Product.find({ visible: true, category: req.params.category }).lean()
             // console.log(products)
         res.render('./pages/public/catalog', { products, title: catalogTitle(req.params.category), category: req.params.category })
     } catch (e) {
         console.log(e)
+        res.redirect('/')
+    }
+})
+
+router.get('/shop/product/:product', async(req, res) => {
+    try {
+        const product = await Product.findById(req.params(product)).lean()
+        const prodDir = fs.r2eaddirSync(`../static/image/products/${product.prodTitle}`)
+        console.log('dir ', prodDir);
+        res.render('./pages/public/productPage', { product, title: product.prodTitle })
+    } catch (e) {
+        console.log(e);
         res.redirect('/')
     }
 })
@@ -87,29 +101,61 @@ router.post('/api', (req, res) => {
 })
 
 router.get('/basket', async(req, res) => {
-    //console.log(req.cookies.order)
-    if (req.cookies.order) {
-        products = req.cookies.order.split(' ')
-            //console.log('prode', products)
+    try {
+        //console.log(req.cookies.order)
+        if (req.cookies.order) {
+            products = req.cookies.order.split(' ')
+                //console.log('prode', products)
 
-        var basket = [];
+            var basket = [];
+            var totalPrice = 0
+            for (let i = 0; i < products.length; i++) {
+                console.log(`id ${i}`, products[i]);
+                const product = await Product.findById(products[i]).lean()
+                console.log('prodes', product)
+                totalPrice += Number(product.price)
+                basket.push(product)
+            }
 
-        for (let i = 0; i < products.length; i++) {
-            //console.log('id', products[i]);
-            product = await Product.findById(products[i]).lean()
-                //console.log('prodes', product)
-            basket.push(product)
-        }
-        /*await products.forEach(element => {
-            product = Product.findById(element).lean()
-            console.log('prod', product);
-            basket.push(product)
-        });*/
+            res.render('./pages/public/basket', { title: 'Корзина', basket, order: req.cookies.order, totalPrice })
+        } else
+            res.render('./pages/public/basket', { title: 'Корзина' })
+    } catch (e) {
+        console.log(e);
+        res.redirect('/')
+    }
+})
 
-        //console.log('basket', basket);
-        res.render('./pages/public/basket', { title: 'Корзина', basket })
-    } else
-        res.render('./pages/public/basket', { title: 'Корзина' })
+router.post('/getOrder', async(req, res) => {
+    try {
+        dn = new Date(Date.now())
+        const orderNum = '' + dn.getFullYear() + dn.getMonth() + dn.getDate() + dn.getHours() + dn.getMinutes() + dn.getSeconds() + (Math.random() * 100)
+        const order = new Order({
+            orderNumber: orderNum,
+            basket: req.body.order,
+            customer: req.body.customer,
+            phone: req.body.phone,
+            address: req.body.address,
+            comment: req.body.comment
+        })
+
+        await order.save()
+        res.redirect(`/order/${orderId}`)
+    } catch (e) {
+        console.log(e);
+        res.redirect('/')
+    }
+})
+
+router.get('/clearOrder', async(req, res) => {
+    try {
+        res.clearCookie('order')
+        res.redirect('/basket')
+    } catch (e) {
+
+        console.log(e);
+        res.render('./pages/public/basket')
+    }
 })
 
 module.exports = router

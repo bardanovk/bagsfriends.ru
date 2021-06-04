@@ -1,15 +1,44 @@
-<h1>basket</h1>
+<div class="basket-container">
+    <h1>Корзина</h1>
+    <div class="basket-div">
+        {{#if basket.length}}
+        <div class="order-div">
+            {{#each basket}}
+            <div class="product-card">
+                <img src="/image/products/{{prodTitle}}/Main.jpg" alt="Картинка">
+                <div class="prodTitle">{{prodTitle}}</div>
+                <div class="price">{{price}} &#8381</div>
+            </div>
+            {{/each}}
 
-{{#if basket.length}}
-{{#each basket}}
-<div>{{basket}}</div>
-<div class="prodCard">
-    <img src="/image/products/{{prodTitle}}/Main.jpg" alt="Картинка">
-    <div class="prodTitle">{{prodTitle}}</div>
-    <div class="price">{{price}}</div>
+        </div>
+        <div class="form-div">
+            <form action="/getOrder" method="POST" class="order-form">
+                <h3>Форма заказа:</h3>
+                <input type="text" class="hidden" value="{{order}}" name="order">
+                <label for="customer">ФИО:</label>
+                <input type="text" name="customer" id="customer">
+                <label for="address">Адрес:</label>
+                <input type="text" name="address" id="address">
+                <label for="index">Индекс:</label>
+                <input type="text" name="index" id="index">
+                <label for="email">e-mail:</label>
+                <input type="email" name="email" id="email">
+                <label for="phone">Телефон:</label>
+                <input type="text" name="phone" id="phone">
+                <label for="comment">Комментарий:</label>
+                <input type="text" name="comment" id="comment">
+                <div class="total-price">
+                    Стоимость заказа: {{totalPrice}}
+                </div>
+                <button type="submit">Оформить заказ</button>
+            </form>
+            <a href="/clearOrder"><button class="clear-order">Очистить корзину</button></a>
+        </div>
 
+
+        {{else}}
+        Корзина пуста
+        {{/if}}
+    </div>
 </div>
-{{/each}}
-{{else}}
-Корзина пуста
-{{/if}}

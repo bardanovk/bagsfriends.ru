@@ -1,7 +1,7 @@
 module.exports = {
     admCookieOptions: {
         signed: true,
-        domain: 'localhost',
+        domain: '188.225.82.112',
         httpOnly: true,
         maxAge: 3600000,
         // secure: true

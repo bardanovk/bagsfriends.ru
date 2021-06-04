@@ -20,12 +20,12 @@ const options = require('../config/options')
 //     }
 // }
 
-module.exports = async(req, res) => {
+module.exports = async (req, res) => {
     try {
-        // console.log(req.signedCookies.sid);
+        console.log(req.signedCookies.sid);
         if (req.signedCookies.sid === undefined)
             return false
-                // console.log(typeof(req.signedCookies.sid))
+        // console.log(typeof(req.signedCookies.sid))
         const str = 'admin' + '%%' +
             JSON.stringify(req.headers['user-agent']).replace(/"/g, '') + '%%' +
             JSON.stringify(req.headers['accept']).replace(/"/g, '') + '%%' +

@@ -7,8 +7,6 @@ const manageRoutes = require('./routes/manage.route')
 const sassCompile = require('./middleware/sassRender')
 const path = require('path')
 
-const config = require('./config/tokens')
-const options = require('./config/options')
 
 const PORT = process.env.PORT || 8080
 
@@ -36,7 +34,7 @@ async function start() {
         sassCompile()
         console.log('Conecting database...');
         try {
-            await mongoose.connect('mongodb+srv://bardanovk:qR7uSwllQKAx5WNH@claster0.tkdrl.mongodb.net/Content?retryWrites=true&w=majority', {
+            await mongoose.connect('mongodb+srv://bardanovk:gHbvEOjJq5pvQwAP@claster0.tkdrl.mongodb.net/Content?retryWrites=true&w=majority', {
                 useNewUrlParser: true,
                 useFindAndModify: true,
                 useUnifiedTopology: true

@@ -1,0 +1,33 @@
+<h2>Поставки</h2>
+<a href="/manage/products/shipments/create"><button>Создать поставку</button></a>
+<form class="search-date" action="/manage/products/shipments/" method="GET">
+    <input type="date" name="date" id="" placeholder="Выберите дату">
+    <button type="submit">Отфильтровать</button>
+</form>
+{{#if shipments.length}}
+<table class="manage-table">
+    <tr class="manage-table-header">
+        <th>Дата</th>
+        <th>Фото товара</th>
+        <th>Наименование</th>
+        <th>Количество</th>
+        <th>Удалить поставку</th>
+    </tr>
+    {{#each shipments}}
+    <tr>
+        <th>{{date}}</th>
+        <th><img src="/image/products/{{product.prodTitle}}/Main.jpg" alt="img" width="50"></th>
+        <th>{{product.prodTitle}}</th>
+        <th>{{count}}</th>
+        <th><a href="../../../../../manage/products/shipments/delete/{{_id}}"><button type="button">Удалить</button>
+        </th>
+    </tr>
+    {{/each}}
+</table>
+{{else}}
+{{#if date.length}}
+<h3>Поставок на {{date}} не найдено</h3>
+{{else}}
+<h3>Поставок нет!</h3>
+{{/if}}
+{{/if}}

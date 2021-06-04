@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 $color-footer:rgb(143, 140, 138);
 $color-footer-text: rgb(192, 192, 192);
 @import 'fonts';
@@ -9,6 +13,8 @@ $color-footer-text: rgb(192, 192, 192);
 @import 'partials/public/blog/blog';
 @import 'partials/public/general/scroll';
 @import 'partials/public/shop/catalog.scss';
+@import 'partials/public/shop/productPage.scss';
+@import 'partials/public/shop/basket.scss';
 body {
     overflow-y: auto;
     overflow-x: hidden;
@@ -22,6 +28,7 @@ body {
 }
 
 .page-content {
+    position: relative;
     display: block;
     padding-top: 26vh;
     min-height: 100vh;

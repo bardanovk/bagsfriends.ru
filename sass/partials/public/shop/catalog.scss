@@ -98,7 +98,15 @@
     position: relative;
     display: flex;
     flex-wrap: wrap;
+    .product-card-link {
+        color: black;
+        text-decoration: none;
+    }
     .product-card {
+        padding: 20px;
+        background-color: aquamarine;
+        font-family: 'Bellota';
+        transition: .3s;
         .product-image {
             width: 15vw;
             height: 15vw;
@@ -107,7 +115,21 @@
             background-size: 100%;
             transition: .2s;
         }
-        .product-title {}
-        .product-price {}
+        .product-title {
+            padding-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            &:hover {
+                opacity: .5;
+            }
+        }
+        .product-price {
+            font-size: 16px;
+            padding-top: 10px;
+            transition: .3s;
+            &:hover {
+                opacity: .5;
+            }
+        }
     }
 }

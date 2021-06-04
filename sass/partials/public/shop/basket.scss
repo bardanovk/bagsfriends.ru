@@ -1,0 +1,99 @@
+.basket-container {
+    font-family: 'Bellota';
+    margin: 0 auto;
+    width: 80%;
+}
+
+.product-card {
+    margin: 25px;
+}
+
+.basket-div {
+    position: relative;
+    display: flex;
+    .order-div {
+        width: 66%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        img {
+            display: inline;
+            width: 200px;
+        }
+    }
+    .form-div {
+        width: 33%;
+    }
+}
+
+.order-form {
+    margin-bottom: 20px;
+    label {
+        display: block;
+    }
+    input {
+        display: block;
+        border: none;
+        outline: none;
+        transition: .3s;
+        border-bottom: 2px solid blue;
+        font-size: 30px;
+        margin-bottom: 20px;
+        &:active {
+            -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        }
+        &:focus {
+            -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        }
+    }
+    .hidden {
+        display: none;
+    }
+    h3 {
+        font-weight: bold;
+    }
+    button {
+        font-family: 'Bellota';
+        padding: 5px 20px;
+        font-size: 20px;
+        background-color: white;
+        border: blue solid 2px;
+        &:hover {
+            -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        }
+        &:active {
+            -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+            -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+        }
+    }
+}
+
+.clear-order {
+    font-family: 'Bellota';
+    padding: 5px 20px;
+    font-size: 20px;
+    background-color: white;
+    border: 2px solid red;
+    &:hover {
+        -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    }
+    &:active {
+        -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+        -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+    }
+}
+
+.total-price {
+    font-weight: bold;
+    margin-bottom: 20px;
+}

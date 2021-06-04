@@ -1,0 +1,73 @@
+.product-page-container {
+    position: relative;
+    font-family: 'Bellota';
+    margin: 0 auto;
+    width: 1280px;
+}
+
+.product-page-card {
+    display: flex;
+    width: 1280px;
+}
+
+.product-page-images {
+    padding: auto;
+    width: 66%;
+    .main {
+        display: flex;
+        justify-content: center;
+        img {
+            width: 600px;
+            -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            transition: .3s;
+            &:hover {
+                -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+                -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+                box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+            }
+        }
+    }
+}
+
+.product-page-info {
+    width: 33%;
+    font-size: 22px;
+    .title {
+        margin-bottom: 50px;
+    }
+    .price {
+        margin-bottom: 50px;
+    }
+    .disc {
+        margin-bottom: 50px;
+    }
+    button {
+        font-family: 'Bellota';
+        font-size: 25px;
+        background-color: white;
+        border: none;
+        padding: 15px 20px;
+        -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        transition: .3s;
+        &:hover {
+            -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+            -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+        }
+    }
+}
+
+.product-card-image-main {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.product-card-title {
+    font-family: 'Bellota';
+    font-size: 25px;
+    font-weight: bold;
+}

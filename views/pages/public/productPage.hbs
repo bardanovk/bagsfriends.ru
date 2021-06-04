@@ -1,11 +1,34 @@
-<h1>Страница товара</h1>
+<div class="product-page-container">
+    <h1 class="product-card-title">{{product.prodTitle}}</h1>
+    <div class="product-page-card">
 
-<img src="../../image/products/{{product.prodTitle}}/Main.jpg" alt="Картинка"><br>
-<input id="prodID" type="text" value="{{product._id}}" hidden>
-{{product.prodTitle}} <br>
+        <div class="product-page-images">
+            <div class="main">
+                <img class="product-card-image-main" src="../../image/products/{{product.prodTitle}}/Main.jpg"
+                    alt="Картинка">
+            </div>
 
-{{product.price}} <br>
+            <div class="other">
+                <img src="" alt="">
+            </div>
+        </div>
+        <div class="product-page-info">
+            <input id="prodID" type="text" value="{{product._id}}" hidden>
+            <div class="title">
+                {{product.prodTitle}}
+            </div>
+            <div class="price">
+                Цена: {{product.price}}
+            </div>
 
-<button onclick="addToBasket()">Добавить в корзину</button>
+            <div class="disc">
+                <div>Описание:</div>
+                {{product.description}}
+            </div>
 
+
+            <button onclick="addToBasket()">Добавить в корзину</button>
+        </div>
+    </div>
+</div>
 <script src="../../script/toBasket.js"></script>

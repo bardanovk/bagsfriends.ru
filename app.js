@@ -2,6 +2,12 @@ const express = require('express')
 const hbsHelpers = require('handlebars-helpers')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+
+const News = require('./models/news')
+const Product = require('./models/product')
+const Order = require('./models/order')
+const Shipment = require('./models/shipment')
+
 const pageRoutes = require('./routes/pages.route')
 const manageRoutes = require('./routes/manage.route')
 const sassCompile = require('./middleware/sassRender')

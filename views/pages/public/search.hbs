@@ -1,0 +1,15 @@
+{{#if order}}
+<form action="/orders/search" class="search-form" method="POST">
+    <label for="search">Введите номер заказа:</label>
+    <input type="text" value="{{order.orderNumber}}" name="orderNum">
+    <button type="submit">Поиск</button>
+</form>
+
+{{> orderField}}
+{{else}}
+<form action="/orders/search" class="search-form" method="POST">
+    <label for="search">Введите номер заказа:</label>
+    <input type="text" name="orderNum">
+    <button type="submit">Поиск</button>
+</form>
+{{/if}}

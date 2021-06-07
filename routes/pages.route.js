@@ -4,18 +4,19 @@ const Product = require('../models/product')
 const cookieParser = require('cookie-parser')
 const config = require('../config/tokens')
 const dateParse = require('../middleware/dateParser')
-const product = require('../models/product')
 const catalogTitle = require('../middleware/catalogTitleParser')
 const fs = require('fs')
 const Order = require('../models/order')
+
 
 const router = Router()
 
 router.use(cookieParser(config.cookie))
 
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
     res.render('index', { title: 'Bagsfriends.ru' })
 })
+
 router.get('/shop', async(req, res) => {
     const products = await Product.find({ visible: true }).lean()
         //console.log(products);
@@ -110,9 +111,9 @@ router.get('/basket', async(req, res) => {
             var basket = [];
             var totalPrice = 0
             for (let i = 0; i < products.length; i++) {
-                console.log(`id ${i}`, products[i]);
+                //console.log(`id ${i}`, products[i]);
                 const product = await Product.findById(products[i]).lean()
-                console.log('prodes', product)
+                    //console.log('prodes', product)
                 totalPrice += Number(product.price)
                 basket.push(product)
             }
@@ -126,21 +127,68 @@ router.get('/basket', async(req, res) => {
     }
 })
 
+router.get('/orders/search', async(req, res) => {
+    try {
+        res.render('./pages/public/search', { title: 'Поиск заказа' })
+    } catch (e) {
+        console.log(e);
+        res.redirect('/')
+    }
+})
+
+router.post('/orders/search', async(req, res) => {
+    try {
+        // console.log(req.body)
+        res.redirect(`/orders/search/${req.body.orderNum}`)
+    } catch (e) {
+        console.log(e);
+        res.redirect('/orders/search')
+    }
+})
+
+router.get('/orders/search/:id', async(req, res) => {
+    try {
+        const order = await Order.findOne({ orderNumber: req.params.id }).populate('basket').lean()
+            //console.log(order);
+        res.render('./pages/public/search', { title: `Заказ #${order.orderNumber}`, order })
+    } catch (e) {
+        console.log(e);
+        res.redirect('/')
+    }
+})
+
+
+
 router.post('/getOrder', async(req, res) => {
     try {
         dn = new Date(Date.now())
-        const orderNum = '' + dn.getFullYear() + dn.getMonth() + dn.getDate() + dn.getHours() + dn.getMinutes() + dn.getSeconds() + (Math.random() * 100)
+        const orderNum = '' + dn.getFullYear() + dn.getMonth() + dn.getDate() + dn.getHours() + dn.getMinutes() + dn.getSeconds() + (Math.round(Math.random(), 2) * 100)
+            //console.log(req.body)
+            //console.log(orderNum);
+        basket = req.body.order.split(' ')
+        let totalPrice = 0
+
+        for (let index = 0; index < basket.length; index++) {
+            const element = basket[index];
+            tmp = await Product.findById(element)
+                //console.log(element);
+                //console.log(tmp.price);
+            totalPrice += 0 + Number(tmp.price)
+        }
+
         const order = new Order({
             orderNumber: orderNum,
-            basket: req.body.order,
+            basket: basket,
             customer: req.body.customer,
             phone: req.body.phone,
             address: req.body.address,
-            comment: req.body.comment
+            comment: req.body.comment,
+            email: req.body.email,
+            totalPrice: totalPrice
         })
 
         await order.save()
-        res.redirect(`/order/${orderId}`)
+        res.redirect(`/order/${order.orderNumber}`)
     } catch (e) {
         console.log(e);
         res.redirect('/')

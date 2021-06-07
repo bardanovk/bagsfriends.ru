@@ -22,7 +22,7 @@ const options = require('../config/options')
 
 module.exports = async (req, res) => {
     try {
-        console.log(req.signedCookies.sid);
+        //console.log(req.signedCookies.sid);
         if (req.signedCookies.sid === undefined)
             return false
         // console.log(typeof(req.signedCookies.sid))

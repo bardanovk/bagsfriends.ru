@@ -165,6 +165,8 @@ router.post('/getOrder', async(req, res) => {
         const orderNum = '' + dn.getFullYear() + dn.getMonth() + dn.getDate() + dn.getHours() + dn.getMinutes() + dn.getSeconds() + (Math.round(Math.random(), 2) * 100)
             //console.log(req.body)
             //console.log(orderNum);
+        const date = '' + dn.getFullYear() + '-' + dn.getMonth() + '-' + dn.getDate()
+        const time = '' + dn.getHours() + ':' + dn.getMinutes()
         basket = req.body.order.split(' ')
         let totalPrice = 0
 
@@ -184,11 +186,13 @@ router.post('/getOrder', async(req, res) => {
             address: req.body.address,
             comment: req.body.comment,
             email: req.body.email,
-            totalPrice: totalPrice
+            totalPrice: totalPrice,
+            date: date,
+            time: time
         })
 
         await order.save()
-        res.redirect(`/order/${order.orderNumber}`)
+        res.redirect(`/orders/search/${order.orderNumber}`)
     } catch (e) {
         console.log(e);
         res.redirect('/')

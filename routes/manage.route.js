@@ -17,6 +17,7 @@ const Shipment = require('../models/shipment')
 
 const productValidar = require('../middleware/prodValidator')
 const { url } = require('inspector')
+const { populate } = require('../models/news')
 
 //const photoNews = require('../middleware/photoNews')
 
@@ -24,14 +25,14 @@ const upload = multer({ dest: './tmp' })
 
 router.use(cookieParser(config.cookie))
 
-router.get('/login', async (req, res, next) => {
+router.get('/login', async(req, res, next) => {
     if ((await verifyCookie(req, res)).valueOf())
         res.redirect('/manage')
     else
         res.render('./pages/manage/login', { title: 'Авторизация' })
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', async(req, res) => {
     //console.log(req.body, req.body.pass1, req.body.pass2, verifyF2B(req.body.pass1, req.body.pass2))
     if (verifyF2B(req.body.pass1, req.body.pass2)) {
         await res.cookie('sid', await hashCookie(req), options.admCookieOptions)
@@ -52,12 +53,12 @@ router.post('/login', async (req, res) => {
 //     res.render('./pages/manage/test', { layout: 'test', test })
 // })
 
-router.get('/logout', async (req, res) => {
+router.get('/logout', async(req, res) => {
     res.clearCookie('sid')
     res.redirect('/')
 })
 
-router.get('/manage', async (req, res) => {
+router.get('/manage', async(req, res) => {
     // console.log('enter point', verifyCookie(req, res));
     if ((await verifyCookie(req, res)).valueOf())
         res.render('./pages/manage/manage', { layout: 'manage', title: 'Панель управления' })
@@ -65,7 +66,7 @@ router.get('/manage', async (req, res) => {
         res.redirect('/login')
 })
 
-router.get('/manage/products', async (req, res) => {
+router.get('/manage/products', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         const products = await Product.find({}).lean()
         res.render('./pages/manage/products', { layout: 'manage', products, title: 'Товары' })
@@ -73,20 +74,20 @@ router.get('/manage/products', async (req, res) => {
         res.redirect('/login')
 })
 
-router.get('/manage/products/create', async (req, res) => {
+router.get('/manage/products/create', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf())
         res.render('./pages/manage/createProduct', { layout: 'manage', title: 'Создание товара' })
     else
         res.redirect('/login')
 })
 
-router.post('/manage/product/create', upload.array('photo'), async (req, res) => {
+router.post('/manage/product/create', upload.array('photo'), async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         // console.log('body', req.body);
         try {
             // if (productValidar(req.body)) {
             console.log(req.body);
-            console.log(typeof (req.body.category));
+            console.log(typeof(req.body.category));
             let catArray = req.body.category.split(' # ')
             console.log(catArray);
             if (req.files.length != 0)
@@ -130,19 +131,19 @@ router.get('/manage/products/edit', (req, res) => {
         res.redirect('/login')
 })
 */
-router.get('/manage/products/edit/:id', async (req, res) => {
+router.get('/manage/products/edit/:id', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         const product = await Product.findById(req.params.id, (e) => {
-            if (e)
-                console.log(e)
-        }).lean()
-        //console.log(typeof product.visible, product.visible)
+                if (e)
+                    console.log(e)
+            }).lean()
+            //console.log(typeof product.visible, product.visible)
         res.render('./pages/manage/editProduct', { layout: 'manage', product, title: 'Редактирование товара' })
     } else
         res.redirect('/login')
 })
 
-router.post('/manage/products/edit/:id', upload.single(null), async (req, res) => {
+router.post('/manage/products/edit/:id', upload.single(null), async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
             let catArray = req.body.category.split(' # ')
@@ -162,7 +163,7 @@ router.post('/manage/products/edit/:id', upload.single(null), async (req, res) =
         res.redirect('/login')
 })
 
-router.get('/manage/products/shipments', upload.single(null), async (req, res) => {
+router.get('/manage/products/shipments', upload.single(null), async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
             let shipments
@@ -181,7 +182,7 @@ router.get('/manage/products/shipments', upload.single(null), async (req, res) =
     }
 })
 
-router.get('/manage/products/shipments/create', upload.single(null), async (req, res) => {
+router.get('/manage/products/shipments/create', upload.single(null), async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
             const products = await Product.find({}).lean()
@@ -195,7 +196,7 @@ router.get('/manage/products/shipments/create', upload.single(null), async (req,
     }
 })
 
-router.post('/manage/products/shipments/create', upload.single(null), async (req, res) => {
+router.post('/manage/products/shipments/create', upload.single(null), async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
             const dn = new Date(Date.now())
@@ -235,7 +236,7 @@ router.post('/manage/products/shipments/create', upload.single(null), async (req
     }
 })
 
-router.get('/manage/products/shipments/delete/:id', async (req, res) => {
+router.get('/manage/products/shipments/delete/:id', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
             const shipment = await Shipment.findById(req.params.id)
@@ -255,7 +256,7 @@ router.get('/manage/products/shipments/delete/:id', async (req, res) => {
     }
 })
 
-router.get('/manage/news', async (req, res) => {
+router.get('/manage/news', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
             const news = await News.find({}).lean()
@@ -267,14 +268,14 @@ router.get('/manage/news', async (req, res) => {
         res.redirect('/login')
 })
 
-router.get('/manage/news/create', async (req, res) => {
+router.get('/manage/news/create', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf())
         res.render('./pages/manage/createNews', { layout: 'manage', title: 'Создание новости' })
     else
         res.redirect('/login')
 })
 
-router.post('/manage/news/create', upload.single('photo'), async (req, res) => {
+router.post('/manage/news/create', upload.single('photo'), async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
             newsLabelUpload(req.file, req.body.newsTitle)
@@ -312,7 +313,7 @@ router.post('/manage/news/create', upload.single('photo'), async (req, res) => {
     }
 })
 
-router.get('/manage/news/edit/:id', async (req, res) => {
+router.get('/manage/news/edit/:id', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
 
         const news = await News.findById(req.params.id, (e) => {
@@ -327,7 +328,7 @@ router.get('/manage/news/edit/:id', async (req, res) => {
         res.redirect('/login')
 })
 
-router.post('/manage/news/edit/:id', upload.single(null), async (req, res) => {
+router.post('/manage/news/edit/:id', upload.single(null), async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
             let news = await News.findById(req.params.id)
@@ -345,7 +346,7 @@ router.post('/manage/news/edit/:id', upload.single(null), async (req, res) => {
     } else
         res.redirect('/login')
 })
-router.post('/manage/news/delete/:id', async (req, res) => {
+router.post('/manage/news/delete/:id', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
             console.log(req.params.id);
@@ -364,7 +365,7 @@ router.post('/manage/news/delete/:id', async (req, res) => {
         res.redirect('/login')
 })
 
-router.post('/manage/news/uploadPhoto', upload.single('image'), async (req, res) => {
+router.post('/manage/news/uploadPhoto', upload.single('image'), async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
             newsPhotoRedirect(req.file)
@@ -382,10 +383,11 @@ router.post('/manage/news/uploadPhoto', upload.single('image'), async (req, res)
     }
 })
 
-router.get('/manage/orders', async (req, res) => {
+router.get('/manage/orders', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
-            const orders = Order.find({}).lean()
+            const orders = await Order.find({}).populate('basket').lean()
+                // console.log(orders);
             res.render('./pages/manage/orders', { layout: 'manage', title: 'Заказы', orders })
         } catch (e) {
             console.log(e);
@@ -394,5 +396,22 @@ router.get('/manage/orders', async (req, res) => {
     } else
         res.redirect('/login')
 })
+
+router.get('/manage/orders/edit/:id', async(req, res) => {
+    if ((await verifyCookie(req, res)).valueOf()) {
+        try {
+            const order = await Order.findById(req.params.id).populate('basket').lean()
+
+            res.render('./pages/manage/editOrder', { layout: 'manage', title: 'Редактирование заказа', order })
+        } catch (e) {
+            console.log(e);
+            res.redirect('/manage/orders')
+        }
+
+    } else
+        res.redirect('/login')
+})
+
+
 
 module.exports = router

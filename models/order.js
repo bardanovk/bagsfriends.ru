@@ -11,7 +11,10 @@ const schema = new Schema({
     address: { type: String, required: true },
     deliveryMethod: { type: String, default: 'Неизствестно' },
     deliveryPrice: { type: Number },
-    comment: { type: String }
+    comment: { type: String },
+    date: { type: String, required: true },
+    time: { type: String, required: true },
+    ended: { type: Boolean, default: false }
 })
 
 module.exports = model('Order', schema)

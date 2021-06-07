@@ -1,1 +1,37 @@
-<h2>orders</h2>
+<h1>Заказы</h1>
+
+<a href="/manage/orders/create"><button>Создать заказ</button></a>
+{{!-- <a href="/manage/"><button>Приход товара</button></a> --}}
+
+
+
+{{#if orders.length}}
+<table class="manage-table">
+    <tr class="manage-table-header">
+        <th>Номер заказа</th>
+        <th>Заказчик</th>
+        <th>Состав</th>
+        <th>Статус</th>
+        <th>Дата и время</th>
+        <th>Редактировать</th>
+    </tr>
+    {{#each orders}}
+    <tr>
+        <th>{{orderNumber}}</th>
+        <th>{{customer}}</th>
+        <th>
+            <ol>
+                {{#each basket}}
+                <li>{{prodTitle}}</li>
+                {{/each}}
+            </ol>
+        </th>
+        <th>{{status}}</th>
+        <th>{{date}} {{time}}</th>
+        <th><a href="./orders/edit/{{_id}}"><button type="button">Редактировать</button></a></th>
+    </tr>
+    {{/each}}
+</table>
+{{else}}
+<h3>Заказов нет!</h3>
+{{/if}}

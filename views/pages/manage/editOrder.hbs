@@ -1,0 +1,32 @@
+Заказ № {{order.orderNumber}}
+<form action="/manage/orders/edit/{{order._id}}" method="POST">
+    <div class="mb-3">
+        <label for="product" class="form-label">Статус</label>
+        <select class="form-select" aria-label="Default select example" name="status">
+            <option {{#eq order.status "Ожидается подтверждение" }}selected disabled{{/eq}}
+                value="Ожидается подтверждение">
+                Ожидается подтверждение
+            </option>
+            <option {{#eq order.status "Подтвержден" }}selected{{/eq}} value="Подтвержден">Подтвержден
+            </option>
+            <option {{#eq order.status "Ожидает отправки" }}selected{{/eq}} value="Ожидает отправки">Ожидает отправки
+            </option>
+            <option {{#eq order.status "Отправлен" }}selected{{/eq}} value="Отправлен">Отправлен
+            </option>
+            <option {{#eq order.status "Отменен" }}selected{{/eq}} value="Отменен">
+                Отменен
+            </option>
+            <option {{#eq order.status "Получен" }}selected{{/eq}} value="Получен">Получен
+            </option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="count" class="form-label">Количество</label>
+        <input type="number" class="form-control" id="count" name="count">
+    </div>
+    <div class="mb-3">
+        <label for="count" class="form-label">Количество</label>
+        <input type="number" class="form-control" id="count" name="count">
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>

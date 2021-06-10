@@ -6,8 +6,7 @@ const schema = new Schema({
     visible: { type: Boolean, required: true, default: false },
     price: { type: Number, required: true },
     description: { type: String, required: true },
-    count: { type: Number, required: true, default: 0 },
-    reserve: { type: Number, required: true, default: 0 }
+    count: { type: Number, required: true, default: 0 }
 })
 
 module.exports = model('Product', schema)

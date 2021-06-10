@@ -68,8 +68,43 @@ router.get('/manage', async(req, res) => {
 
 router.get('/manage/products', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
-        const products = await Product.find({}).lean()
-        res.render('./pages/manage/products', { layout: 'manage', products, title: 'Товары' })
+        try {
+            const products = await Product.find({}).lean()
+            console.log(products);
+            let reserved = 0
+            for (let index = 0; index < products.length; index++) {
+
+                let productId = products[index]._id
+                const orders = await Order.find({ $or: [{ status: 'Подтвержден' }, { status: 'Ожидается отправка' }], basket: productId }).lean()
+                    // console.log(orders);
+                for (let index = 0; index < orders.length; index++) {
+                    const baskets = orders[index].basket;
+                    // console.log('basket', baskets);
+                    for (let index = 0; index < baskets.length; index++) {
+                        const element = JSON.stringify(baskets[index])
+                            // console.log('match', element, JSON.stringify(productId));
+                            // console.log(typeof(element), typeof(JSON.stringify(productId)));
+                            // console.log(element == JSON.stringify(productId));
+                        productId1 = JSON.stringify(productId)
+                        if (element == productId1)
+                            reserved++
+                    }
+                }
+                products[index].reserved = reserved
+                console.log('reserved', reserved)
+            }
+            console.log(products);
+
+            // products.forEach(element => {
+            //     const reseved = Order.findOne({}, { basket: element._id }).lean()
+            //     console.log(reseved);
+            // });
+            res.render('./pages/manage/products', { layout: 'manage', products, title: 'Товары' })
+        } catch (e) {
+            console.log(e);
+            res.redirect('/manage')
+        }
+
     } else
         res.redirect('/login')
 })
@@ -346,6 +381,7 @@ router.post('/manage/news/edit/:id', upload.single(null), async(req, res) => {
     } else
         res.redirect('/login')
 })
+
 router.post('/manage/news/delete/:id', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
@@ -386,8 +422,15 @@ router.post('/manage/news/uploadPhoto', upload.single('image'), async(req, res) 
 router.get('/manage/orders', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
-            const orders = await Order.find({}).populate('basket').lean()
-                // console.log(orders);
+            let orders
+            if (req.query.status) {
+                if (req.query.date)
+                    orders = await Order.find({ status: req.query.status, orderDate: req.query.date }).populate('basket').lean()
+                else
+                    orders = await Order.find({ status: req.query.status }).populate('basket').lean()
+
+            }
+
             res.render('./pages/manage/orders', { layout: 'manage', title: 'Заказы', orders })
         } catch (e) {
             console.log(e);
@@ -401,13 +444,124 @@ router.get('/manage/orders/edit/:id', async(req, res) => {
     if ((await verifyCookie(req, res)).valueOf()) {
         try {
             const order = await Order.findById(req.params.id).populate('basket').lean()
-
             res.render('./pages/manage/editOrder', { layout: 'manage', title: 'Редактирование заказа', order })
         } catch (e) {
             console.log(e);
             res.redirect('/manage/orders')
         }
+    } else
+        res.redirect('/login')
+})
 
+router.post('/manage/orders/edit/:id', async(req, res) => {
+    if ((await verifyCookie(req, res)).valueOf()) {
+        try {
+            let order = await Order.findById(req.params.id)
+
+            console.log(req.body);
+            if (req.body.status)
+                order.status = req.body.status
+            if (req.body.totalPrice)
+                order.totalPrice = req.body.totalPrice
+            if (req.body.customer)
+                order.customer = req.body.customer
+            if (req.body.phone)
+                order.phone = req.body.phone
+            if (req.body.email)
+                order.email = req.body.email
+            if (req.body.address)
+                order.address = req.body.address
+            if (req.body.deliveryMethod)
+                order.deliveryMethod = req.body.deliveryMethod
+            if (req.body.deliveryPrice)
+                order.deliveryPrice = req.body.deliveryPrice
+            if (req.body.comment)
+                order.comment = req.body.comment
+
+            if (req.body.status == 'Отправлен') {
+                for (let index = 0; index < order.basket.length; index++) {
+                    const element = order.basket[index];
+                    let product = await Product.findById(element)
+                    product.count--
+                        await product.save()
+                }
+            }
+
+            if (req.body.status == 'Возврат получен') {
+                for (let index = 0; index < order.basket.length; index++) {
+                    const element = oreder.basket[index];
+                    let product = await Product.findById(element)
+                    product.count++
+                        await product.save()
+                }
+            }
+
+            order.save()
+            res.redirect('/manage/orders')
+        } catch (e) {
+            console.log(e);
+            res.redirect('/manage/orders')
+        }
+    } else
+        res.redirect('/login')
+})
+
+router.get('/manage/orders/basket/:id', async(req, res) => {
+    if ((await verifyCookie(req, res)).valueOf()) {
+        try {
+            const order = await Order.findById(req.params.id).populate('basket').lean()
+            const products = await Product.find({ count: { $gt: 0 } }).lean()
+            res.render('./pages/manage/editBasket', { layout: 'manage', title: `Состав #${order.orderNumber}`, order, products })
+        } catch (e) {
+            console.log(e);
+            res.redirect('/manage/orders')
+        }
+    } else
+        res.redirect('/login')
+})
+
+router.get('/manage/orders/basket/delete/:orderID/:productID', async(req, res) => {
+    if ((await verifyCookie(req, res)).valueOf()) {
+        try {
+            let order = await Order.findById(req.params.orderID)
+            console.log(order.basket);
+            console.log(typeof(req.params.productID));
+            productID = '"' + req.params.productID + '"'
+            console.log(productID);
+
+            for (let index = 0; index < order.basket.length; index++) {
+                const element = JSON.stringify(order.basket[index])
+
+                if (element == productID) {
+                    order.basket.splice(index, index + 1)
+                    break
+                }
+            }
+
+            await order.save()
+                // await order.save()
+            res.redirect('/manage/orders')
+        } catch (e) {
+            console.log(e);
+            res.redirect(`/manage/orders/basket/${req.params.orderID}`)
+        }
+    } else
+        res.redirect('/login')
+})
+
+router.post('/manage/orders/basket/add/:orderID', async(req, res) => {
+    if ((await verifyCookie(req, res)).valueOf()) {
+        try {
+            console.log(req.params.orderID);
+            const order = await Order.findById(req.params.orderID)
+            order.basket.push(req.body.newProduct)
+
+            await order.save()
+            res.redirect(`/manage/orders/basket/${req.params.orderID}`)
+        } catch (e) {
+            console.log(e);
+            res.redirect(`/manage/orders/basket`)
+        }
     } else
         res.redirect('/login')
 })

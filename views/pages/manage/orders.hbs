@@ -2,7 +2,21 @@
 
 <a href="/manage/orders/create"><button>Создать заказ</button></a>
 {{!-- <a href="/manage/"><button>Приход товара</button></a> --}}
-
+<form class="search-date" action="/manage/orders/" method="GET">
+    <select name="status" id="">
+        <option value="" disabled selected>Статус</option>
+        <option value="Ожидается подтверждение">Ожидается подтверждение</option>
+        <option value="Подтвержден">Подтвержден</option>
+        <option value="Ожидается отправка">Ожидается отправка</option>
+        <option value="Отправлен">Отправлен</option>
+        <option value="Получен">Получен</option>
+        <option value="Ожидается возврат">Ожидается возврат</option>
+        <option value="Возврат получен">Возврат получен</option>
+        <option value="Отменен">Отменен</option>
+    </select>
+    <input type="date" name="date" placeholder="Дата">
+    <button type="submit">Отфильтровать</button>
+</form>
 
 
 {{#if orders.length}}
@@ -27,11 +41,12 @@
             </ol>
         </th>
         <th>{{status}}</th>
-        <th>{{date}} {{time}}</th>
-        <th><a href="./orders/edit/{{_id}}"><button type="button">Редактировать</button></a></th>
+        <th>{{orderDate}} {{time}}</th>
+        <th><a href="/manage/orders/basket/{{_id}}"><button>Состав</button></a> <a
+                href="/manage/orders/edit/{{_id}}"><button type="button">Информация</button></a></th>
     </tr>
     {{/each}}
 </table>
 {{else}}
-<h3>Заказов нет!</h3>
+<h3>Выберите статус заказа</h3>
 {{/if}}

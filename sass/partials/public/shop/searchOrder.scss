@@ -1,0 +1,79 @@
+.search-form {
+    position: relative;
+    max-width: 75%;
+    margin: 0 auto;
+    padding-top: 2.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    form {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 75%;
+        align-items: center;
+        font-family: 'Bellota';
+        label {
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        input {
+            margin-bottom: 20px;
+            font-size: 25px;
+            font-family: 'Bellota';
+            outline: none;
+            border: none;
+            text-align: center;
+            border-bottom: 2px solid blue;
+            width: 75%;
+            transition: .5s;
+            &:active {
+                -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+                -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+                box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            }
+            &:focus {
+                -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+                -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+                box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            }
+        }
+        button {
+            font-family: 'Bellota';
+            padding: 5px 20px;
+            font-size: 18px;
+            background-color: white;
+            border: blue solid 2px;
+            transition: .5s;
+            &:hover {
+                -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+                -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+                box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            }
+            &:active {
+                -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+                -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+                box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+            }
+        }
+    }
+    .order-info {
+        position: relative;
+        width: 75%;
+        font-family: 'Bellota';
+        h2 {}
+        .basket {
+            display: flex;
+            .product-card {
+                img {
+                    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+                    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+                    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
+                }
+                .prodTitle {}
+            }
+        }
+        h3 {}
+    }
+}

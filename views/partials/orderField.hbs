@@ -1,5 +1,5 @@
 <div class="order-info">
-    <h2>Заказ номер {{order.orderNumber}}</h2>
+    <h2>Заказ номер #{{order.orderNumber}}</h2>
 
     <div class="basket">
         {{#each order.basket}}
@@ -13,4 +13,13 @@
     <h3>Вид доставки: {{order.deliveryMethod}}</h3>
     <h3>Адрес получения: {{order.address}}</h3>
     <h3>Статус: {{order.status}}</h3>
+    {{#if order.deliveryMethod}}
+    {{#eq order.deliveryMethod "Неизвестно"}}
+    {{else}}
+    <h3>Доставка: {{order.deliveryMethod}}</h3>
+    <h3>Трек-номер; {{order.trackNumber}}</h3>
+    {{/eq}}
+    {{/if}}
+
+    <h3>Общая стоитмость: {{totalPrice}} &#8381</h3>
 </div>

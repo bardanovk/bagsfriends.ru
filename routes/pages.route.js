@@ -150,7 +150,10 @@ router.get('/orders/search/:id', async(req, res) => {
     try {
         const order = await Order.findOne({ orderNumber: req.params.id }).populate('basket').lean()
             //console.log(order);
-        res.render('./pages/public/search', { title: `Заказ #${order.orderNumber}`, order })
+        let totalPrice = Number.parseInt(order.totalPrice)
+        if (order.deliveryPrice)
+            totalPrice += Number.parseInt(order.deliveryPrice)
+        res.render('./pages/public/search', { title: `Заказ #${order.orderNumber}`, order, totalPrice })
     } catch (e) {
         console.log(e);
         res.redirect('/')
@@ -192,7 +195,9 @@ router.post('/getOrder', async(req, res) => {
         })
 
         await order.save()
+        res.clearCookie('order')
         res.redirect(`/orders/search/${order.orderNumber}`)
+
     } catch (e) {
         console.log(e);
         res.redirect('/')

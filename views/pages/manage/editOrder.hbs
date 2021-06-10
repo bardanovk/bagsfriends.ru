@@ -1,32 +1,70 @@
 Заказ № {{order.orderNumber}}
+Дата и время получения: {{order.orderDate}} {{order.time}}
 <form action="/manage/orders/edit/{{order._id}}" method="POST">
     <div class="mb-3">
         <label for="product" class="form-label">Статус</label>
         <select class="form-select" aria-label="Default select example" name="status">
-            <option {{#eq order.status "Ожидается подтверждение" }}selected disabled{{/eq}}
-                value="Ожидается подтверждение">
-                Ожидается подтверждение
+            <option {{#eq order.status "Ожидается подтверждение" }} selected {{/eq}} disabled
+                value="Ожидается подтверждение">Ожидается подтверждение</option>
+            <option {{#eq order.status "Подтвержден" }} selected disabled {{/eq}} {{#eq order.status "Отправлен" }}
+                disabled {{/eq}} {{#eq order.status "Получен" }} disabled {{/eq}} {{#eq
+                order.status "Ожидается отправка" }} disabled {{/eq}} {{#eq order.status "Ожидается возврат" }} disabled
+                {{/eq}} {{#eq order.status "Отменен" }} disabled {{/eq}} {{#eq order.status "Возврат получен" }}
+                disabled {{/eq}} value="Подтвержден">Подтвержден
             </option>
-            <option {{#eq order.status "Подтвержден" }}selected{{/eq}} value="Подтвержден">Подтвержден
+            <option {{#eq order.status "Ожидается отправка" }} selected disabled {{/eq}} {{#eq order.status "Отправлен"
+                }} disabled {{/eq}} {{#eq order.status "Получен" }} disabled {{/eq}} {{#eq
+                order.status "Ожидается возврат" }} disabled {{/eq}} {{#eq order.status "Отменен" }} disabled {{/eq}}
+                {{#eq order.status "Возврат получен" }} disabled {{/eq}} value="Ожидается отправка">
+                Ожидается отправка</option>
+            <option {{#eq order.status "Отправлен" }} selected disabled {{/eq}} {{#eq
+                order.status "Ожидает подтверждения" }} disabled {{/eq}} {{#eq order.status "Получен" }} disabled
+                {{/eq}} {{#eq order.status "Ожидается возврат" }} disabled {{/eq}} {{#eq order.status "Отменен" }}
+                disabled {{/eq}} {{#eq order.status "Возврат получен" }} disabled {{/eq}} value="Отправлен">Отправлен
             </option>
-            <option {{#eq order.status "Ожидает отправки" }}selected{{/eq}} value="Ожидает отправки">Ожидает отправки
-            </option>
-            <option {{#eq order.status "Отправлен" }}selected{{/eq}} value="Отправлен">Отправлен
-            </option>
-            <option {{#eq order.status "Отменен" }}selected{{/eq}} value="Отменен">
-                Отменен
-            </option>
-            <option {{#eq order.status "Получен" }}selected{{/eq}} value="Получен">Получен
-            </option>
+            <option {{#eq order.status "Получен" }} selected disabled {{/eq}} {{#eq order.status "Отправлен" }} selected
+                disabled {{/eq}} {{#eq order.status "Ожидает подтверждения" }} disabled {{/eq}} {{#eq
+                order.status "Получен" }} disabled {{/eq}} {{#eq order.status "Ожидается возврат" }} disabled {{/eq}}
+                {{#eq order.status "Отменен" }} disabled {{/eq}} {{#eq order.status "Возврат получен" }} disabled
+                {{/eq}} value="Получен">Получен</option>
+            <option {{#eq order.status "Ожидается возврат" }} selected disabled {{/eq}} value="Ожидается возврат">
+                Ожидается возврат</option>
+            <option {{#eq order.status "Возврат получен" }} selected disabled {{/eq}} value="Возврат получен">Возврат
+                получен</option>
+            <option {{#eq order.status "Отменен" }} selected disabled {{/eq}} value="Отменен">Отменен</option>
         </select>
     </div>
     <div class="mb-3">
-        <label for="count" class="form-label">Количество</label>
-        <input type="number" class="form-control" id="count" name="count">
+        <label for="count" class="form-label">Заказчик</label>
+        <input type="text" class="form-control" id="count" name="customer" value="{{order.customer}}">
     </div>
     <div class="mb-3">
-        <label for="count" class="form-label">Количество</label>
-        <input type="number" class="form-control" id="count" name="count">
+        <label for="count" class="form-label">Телефон</label>
+        <input type="number" class="form-control" id="count" name="phone" value="{{order.phone}}">
+    </div>
+    <div class="mb-3">
+        <label for="count" class="form-label">E-mail</label>
+        <input type="email" class="form-control" id="count" name="email" value="{{order.email}}">
+    </div>
+    <div class="mb-3">
+        <label for="count" class="form-label">Адрес</label>
+        <input type="text" class="form-control" id="count" name="address" value="{{order.address}}">
+    </div>
+    <div class="mb-3">
+        <label for="count" class="form-label">Метод отправки</label>
+        <input type="text" class="form-control" id="count" name="deliveryMethod" value="{{order.deliveryMethod}}">
+    </div>
+    <div class="mb-3">
+        <label for="count" class="form-label">Цена доставки</label>
+        <input type="number" class="form-control" id="count" name="deliveryPrice" value="{{order.deliveryPrice}}">
+    </div>
+    <div class="mb-3">
+        <label for="count" class="form-label">Цена заказа</label>
+        <input type="number" class="form-control" id="count" name="totalPrice" value="{{order.totalPrice}}">
+    </div>
+    <div class="mb-3">
+        <label for="count" class="form-label">Комментарий</label>
+        <textarea class="form-control" id="count" name="comment" value="{{order.comment}}"> </textarea>
     </div>
     <button type="submit" class="btn btn-primary">Сохранить</button>
 </form>

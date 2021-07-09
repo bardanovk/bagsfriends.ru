@@ -91,6 +91,7 @@ router.get('/manage/products', async(req, res) => {
                     }
                 }
                 products[index].reserved = reserved
+		reserved = 0
                 console.log('reserved', reserved)
             }
             console.log(products);
@@ -246,7 +247,7 @@ router.post('/manage/products/shipments/create', upload.single(null), async(req,
             if (dn.getDate() < 10)
                 date += 0 + dn.getDate().toString()
             else
-                date += dn + getDate()
+                date += dn.getDate().toString()
 
             const shipment = new Shipment({
                 product: req.body.product,

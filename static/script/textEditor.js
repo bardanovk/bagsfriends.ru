@@ -20,8 +20,8 @@ const editor = new EditorJS({
             class: ImageTool,
             config: {
                 endpoints: {
-                    byFile: 'http://localhost:3000/manage/news/uploadPhoto', // Your backend file uploader endpoint
-                    byUrl: 'http://localhost:8008/fetchUrl', // Your endpoint that provides uploading by Url
+                    byFile: 'http://188.225.82.112/manage/news/uploadPhoto', // Your backend file uploader endpoint
+                    byUrl: 'https://localhost:8008/fetchUrl', // Your endpoint that provides uploading by Url
                 }
             }
         },

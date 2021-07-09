@@ -190,7 +190,7 @@ router.post('/getOrder', async(req, res) => {
             comment: req.body.comment,
             email: req.body.email,
             totalPrice: totalPrice,
-            date: date,
+            orderDate: date,
             time: time
         })
 
